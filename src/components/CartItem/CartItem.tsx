@@ -1,4 +1,5 @@
 import type { CartItem } from '../../types';
+import { products } from '../../data/products';
 import './CartItem.scss';
 
 interface CartItemComponentProps {
@@ -15,6 +16,8 @@ export const CartItemComponent = ({
   onChangeQty,
 }: CartItemComponentProps) => {
   const itemTotal = item.price * item.qty;
+  const product = products.find((p) => p.name === item.name);
+  const imageUrl = product ? product.image : '';
 
   return (
     <div className="cart-item">
@@ -36,7 +39,8 @@ export const CartItemComponent = ({
       </div>
       <div className="cart-right">
         <div className="item-total">
-          <strong>Gesamt:</strong> {itemTotal.toFixed(2)} €
+          <div className="item-total-label">Artikel-Summe:</div>
+          <div className="item-total-value">{itemTotal.toFixed(2)} €</div>
         </div>
         <button onClick={() => onRemove(index)} className="remove-btn">
           Entfernen

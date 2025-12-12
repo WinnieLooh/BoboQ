@@ -20,7 +20,7 @@ export const products: Product[] = [
   },
   {
     id: 'kirsche-boba',
-    name: 'Kirsche Boba',
+    name: 'Kirsch Boba',
     price: 4.9,
     image: img('kirsche_boba.jpg'),
     category: 'boba',

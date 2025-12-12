@@ -7,7 +7,7 @@
   display: grid;
   grid-template-columns: 1fr 200px;
   gap: 20px;
-  align-items: start;
+  align-items: flex-start;
 
   .cart-left {
     strong {
@@ -58,12 +58,20 @@
       background: var(--primary-light);
       border-radius: 8px;
       text-align: right;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
 
-      strong {
-        display: block;
-        color: var(--text-color);
+      .item-total-label {
         font-size: 12px;
-        margin-bottom: 4px;
+        color: var(--text-color);
+        font-weight: 500;
+      }
+
+      .item-total-value {
+        font-size: 16px;
+        font-weight: 700;
+        color: var(--primary-color);
       }
     }
 
@@ -92,15 +100,15 @@
 
     .cart-right {
       flex-direction: row;
-    }
 
-    .item-total {
-      flex: 1;
-      text-align: left;
-    }
+      .item-total {
+        flex: 1;
+        text-align: left;
+      }
 
-    .remove-btn {
-      flex: 1;
+      .remove-btn {
+        flex: 1;
+      }
     }
   }
 }

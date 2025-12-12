@@ -30,7 +30,15 @@ export const CartPage = ({ cart, onRemove, onChangeQty }: CartPageProps) => {
                 />
               ))}
               <div className="cart-total">
-                <h3 id="total">Gesamt: {total.toFixed(2)} €</h3>
+                <h3 id="total">Gesamtbetrag: {total.toFixed(2)} €</h3>
+                <div className="cart-actions">
+                  <button className="checkout-btn" onClick={() => alert('Checkout functionality coming soon!')}>
+                    Zur Kasse
+                  </button>
+                  <button className="quote-btn" onClick={() => alert('Quotation request sent!')}>
+                    Angebot anfordern
+                  </button>
+                </div>
               </div>
             </>
           )}
