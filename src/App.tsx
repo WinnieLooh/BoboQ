@@ -15,7 +15,7 @@ function App() {
   const { cart, addToCart, removeFromCart, changeQty } = useCart();
 
   return (
-    <BrowserRouter>
+    <BrowserRouter basename="/BoboQ">
       <div className="app">
         <Header cart={cart} />
         <main className="main-content">
