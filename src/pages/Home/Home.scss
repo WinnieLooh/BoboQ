@@ -1,0 +1,112 @@
+.home-page {
+  .hero {
+    width: 100%;
+    height: 320px;
+    background: linear-gradient(135deg, var(--primary-light) 0%, var(--primary-color) 100%);
+    border-bottom-left-radius: 18px;
+    border-bottom-right-radius: 18px;
+    box-shadow: inset 0 -20px 60px rgba(180, 130, 200, 0.08);
+    background-image: url('/public/images/hero.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+  }
+
+  .slider {
+    margin: 20px 0;
+
+    .slide-track {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+      gap: 16px;
+      overflow-x: auto;
+      padding: 4px 0;
+
+      .slide {
+        min-width: 150px;
+        text-align: center;
+
+        img {
+          width: 100%;
+          height: 120px;
+          object-fit: cover;
+          border-radius: 8px;
+          margin-bottom: 8px;
+        }
+
+        h3 {
+          font-size: 14px;
+          margin-bottom: 4px;
+        }
+
+        p {
+          font-size: 12px;
+          color: var(--muted);
+        }
+      }
+    }
+  }
+
+  .products {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 16px;
+    margin: 20px 0;
+
+    .product {
+      text-align: center;
+      cursor: pointer;
+      transition: all 0.3s ease;
+
+      &:hover {
+        transform: translateY(-4px);
+      }
+
+      img {
+        width: 100%;
+        height: 150px;
+        object-fit: cover;
+        border-radius: 12px;
+        margin-bottom: 12px;
+      }
+
+      h4 {
+        font-size: 14px;
+      }
+    }
+  }
+
+  .sidebar {
+    .icons {
+      display: flex;
+      gap: 12px;
+      margin-top: 12px;
+
+      a {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 36px;
+        height: 36px;
+        border-radius: 50%;
+        background: var(--primary-light);
+        transition: all 0.3s ease;
+
+        &:hover {
+          background: var(--primary-color);
+        }
+
+        img {
+          width: 20px;
+          height: 20px;
+          object-fit: contain;
+          filter: brightness(0.5);
+        }
+
+        &:hover img {
+          filter: brightness(0) invert(1);
+        }
+      }
+    }
+  }
+}

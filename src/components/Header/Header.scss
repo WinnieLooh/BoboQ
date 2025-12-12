@@ -1,0 +1,138 @@
+header.header {
+  background: var(--primary-color);
+  border-bottom: 1px solid var(--primary-dark);
+  padding: 16px 0;
+  box-shadow: 0 2px 4px rgba(178, 192, 255, 0.2);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+
+  .container {
+    flex-wrap: wrap;
+  }
+
+  .brand {
+    display: flex;
+    align-items: center;
+
+    a {
+      display: flex;
+    }
+
+    img {
+      height: 40px;
+      width: auto;
+      object-fit: contain;
+    }
+  }
+
+  .nav-center {
+    display: flex;
+    gap: 24px;
+    flex: 1;
+    justify-content: center;
+
+    a {
+      color: white;
+      text-decoration: none;
+      font-weight: 500;
+      transition: color 0.3s ease;
+      position: relative;
+
+      &:hover,
+      &.active {
+        color: rgba(255, 255, 255, 0.8);
+
+        &::after {
+          content: '';
+          position: absolute;
+          bottom: -8px;
+          left: 0;
+          right: 0;
+          height: 2px;
+          background: white;
+          border-radius: 1px;
+        }
+      }
+    }
+  }
+
+  .nav-right {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+
+    .cart {
+      font-size: 24px;
+      display: flex;
+      align-items: center;
+      color: white;
+    }
+  }
+
+  .nav-search {
+    input {
+      padding: 8px 12px;
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      border-radius: 20px;
+      background: rgba(255, 255, 255, 0.9);
+      min-width: 200px;
+
+      &:focus {
+        background: white;
+        border-color: white;
+      }
+    }
+  }
+
+  .nav-icons {
+    display: flex;
+    gap: 12px;
+
+    a {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      transition: background 0.3s ease;
+
+      &:hover {
+        background: rgba(255, 255, 255, 0.2);
+      }
+
+      img {
+        width: 24px;
+        height: 24px;
+        object-fit: contain;
+        filter: brightness(0) invert(1);
+      }
+
+      &.whatsapp img {
+        width: 20px;
+      }
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  header.header {
+    .nav-center {
+      flex-basis: 100%;
+      order: 3;
+      justify-content: flex-start;
+      gap: 12px;
+    }
+
+    .nav-right {
+      flex-basis: 100%;
+      order: 4;
+      margin-top: 12px;
+    }
+
+    .nav-search {
+      display: none;
+    }
+  }
+}

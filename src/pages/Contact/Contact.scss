@@ -1,0 +1,46 @@
+.contact-page {
+  padding: 20px;
+
+  main {
+    width: 100%;
+    padding: 0 40px;
+    margin: 0 auto;
+
+    .icons {
+      display: flex;
+      gap: 20px;
+      margin-top: 20px;
+
+      a {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        background: var(--primary-light);
+        transition: all 0.3s ease;
+
+        &:hover {
+          background: var(--primary-color);
+          transform: translateY(-4px);
+        }
+
+        img {
+          width: 20px;
+          height: 20px;
+          object-fit: contain;
+          filter: brightness(0.5);
+        }
+
+        &:hover img {
+          filter: brightness(0) invert(1);
+        }
+
+        &.whatsapp img {
+          width: 18px;
+        }
+      }
+    }
+  }
+}

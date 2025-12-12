@@ -1,0 +1,25 @@
+.cart-page {
+  padding: 20px;
+
+  .cart-container {
+    width: 100%;
+    padding: 0 40px;
+
+    h2 {
+      margin-bottom: 24px;
+    }
+
+    .cart-total {
+      background: var(--primary-light);
+      border-radius: 12px;
+      padding: 20px;
+      text-align: right;
+      margin-top: 24px;
+
+      h3 {
+        color: var(--primary-dark);
+        font-size: 20px;
+      }
+    }
+  }
+}
