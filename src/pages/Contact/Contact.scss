@@ -3,8 +3,45 @@
 
   main {
     width: 100%;
+    max-width: 800px;
     padding: 0 40px;
     margin: 0 auto;
+
+    .contact-info {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 32px;
+      margin: 32px 0;
+
+      .info-section {
+        h3 {
+          color: var(--primary-color);
+          margin-bottom: 12px;
+          font-size: 18px;
+        }
+
+        p {
+          line-height: 1.8;
+          color: var(--text-color);
+
+          a {
+            color: #000;
+            text-decoration: none;
+            font-weight: 500;
+
+            &:hover {
+              text-decoration: underline;
+            }
+          }
+        }
+      }
+    }
+
+    h3 {
+      margin-top: 32px;
+      margin-bottom: 16px;
+      color: var(--primary-color);
+    }
 
     .icons {
       display: flex;
@@ -27,18 +64,11 @@
         }
 
         img {
-          width: 20px;
-          height: 20px;
+          height: 24px;
+          width: auto;
+          max-width: 28px;
           object-fit: contain;
-          filter: brightness(0.5);
-        }
-
-        &:hover img {
-          filter: brightness(0) invert(1);
-        }
-
-        &.whatsapp img {
-          width: 18px;
+          filter: none;
         }
       }
     }

@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import type { Product } from '../../types';
 import './ProductCard.scss';
+import { Link } from 'react-router-dom';
 
 interface ProductCardProps {
   product: Product;
@@ -9,17 +10,22 @@ interface ProductCardProps {
 
 export const ProductCard = ({ product, onAddToCart }: ProductCardProps) => {
   const [quantity, setQuantity] = useState(1);
+  const [isAdding, setIsAdding] = useState(false);
 
   const handleAddToCart = () => {
+    setIsAdding(true);
     onAddToCart(product.name, product.price, quantity);
     setQuantity(1);
+    setTimeout(() => setIsAdding(false), 600);
   };
 
   return (
     <div className="product" data-category={product.category}>
-      <img src={product.image} alt={product.name} />
-      <h3>{product.name}</h3>
-      <p>{product.price.toFixed(2)} €</p>
+      <Link to={`/product/${product.id}`} className="product-link" aria-label={`${product.name} Details ansehen`}>
+        <img src={product.image} alt={product.name} />
+        <h3>{product.name}</h3>
+        <p>{product.price.toFixed(2)} €</p>
+      </Link>
       <div className="qty-wrap">
         <label htmlFor={`qty-${product.id}`}>Anzahl: </label>
         <input
@@ -31,8 +37,8 @@ export const ProductCard = ({ product, onAddToCart }: ProductCardProps) => {
           className="qty"
         />
       </div>
-      <button onClick={handleAddToCart} className="add-to-cart">
-        In den Warenkorb
+      <button onClick={handleAddToCart} className={`add-to-cart ${isAdding ? 'adding' : ''}`}>
+        {isAdding ? '✓ Hinzugefügt!' : 'In den Warenkorb'}
       </button>
     </div>
   );

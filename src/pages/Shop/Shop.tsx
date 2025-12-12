@@ -1,4 +1,5 @@
-import { useState, useMemo } from 'react';
+import { useState, useMemo, useEffect } from 'react';
+import { useSearchParams } from 'react-router-dom';
 import { ProductCard } from '../../components/ProductCard/ProductCard';
 import { products } from '../../data/products';
 import type { FilterCategory } from '../../types';
@@ -9,8 +10,16 @@ interface ShopPageProps {
 }
 
 export const ShopPage = ({ onAddToCart }: ShopPageProps) => {
+  const [searchParams] = useSearchParams();
   const [currentCategory, setCurrentCategory] = useState<FilterCategory>('all');
   const [searchTerm, setSearchTerm] = useState('');
+
+  useEffect(() => {
+    const categoryParam = searchParams.get('category') as FilterCategory | null;
+    if (categoryParam && ['boba', 'tapioka', 'tee', 'sirup', 'zubehor'].includes(categoryParam)) {
+      setCurrentCategory(categoryParam);
+    }
+  }, [searchParams]);
 
   const categories: { id: FilterCategory; label: string }[] = [
     { id: 'all', label: 'Alle' },
@@ -35,7 +44,7 @@ export const ShopPage = ({ onAddToCart }: ShopPageProps) => {
     const priceMatch = term.match(/^price:\s*([<>]=?|=)?\s*([\d\.,]+)$/i);
     if (priceMatch) {
       const op = priceMatch[1] || '=';
-      const num = parseFloat(priceMatch[2].replace(',', '.'));
+      const num = parsePrice(priceMatch[2]);
       const product = products.find((p) => p.name === productName);
       if (!product) return false;
       const p = product.price;
@@ -58,7 +67,7 @@ export const ShopPage = ({ onAddToCart }: ShopPageProps) => {
     // Numeric term: try match price equals
     const numeric = term.match(/^([\d\.,]+)$/);
     if (numeric) {
-      const num = parseFloat(numeric[1].replace(',', '.'));
+      const num = parsePrice(numeric[1]);
       const product = products.find((p) => p.name === productName);
       if (!product) return false;
       return Math.abs(product.price - num) < 0.001;

@@ -3,7 +3,7 @@ import './Imprint.scss';
 export const ImprintPage = () => {
   return (
     <div className="imprint-page">
-      <div style={{ padding: '20px', maxWidth: '1100px', margin: '0 auto' }}>
+      <div className="imprint-wrapper">
         <h1>Impressum</h1>
 
         <h2>Angaben gemäß § 5 TMG</h2>

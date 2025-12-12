@@ -7,6 +7,7 @@ import { CartPage } from './pages/Cart/Cart';
 import { ContactPage } from './pages/Contact/Contact';
 import { FAQPage } from './pages/FAQ/FAQ';
 import { ImprintPage } from './pages/Imprint/Imprint';
+import ProductDetailPage from './pages/ProductDetail/ProductDetail';
 import { useCart } from './hooks/useCart';
 import './App.scss';
 
@@ -16,11 +17,15 @@ function App() {
   return (
     <BrowserRouter>
       <div className="app">
-        <Header />
+        <Header cart={cart} />
         <main className="main-content">
           <Routes>
             <Route path="/" element={<HomePage />} />
             <Route path="/shop" element={<ShopPage onAddToCart={addToCart} />} />
+            <Route
+              path="/product/:id"
+              element={<ProductDetailPage onAddToCart={addToCart} />}
+            />
             <Route
               path="/cart"
               element={

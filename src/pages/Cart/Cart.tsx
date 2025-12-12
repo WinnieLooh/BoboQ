@@ -13,7 +13,7 @@ export const CartPage = ({ cart, onRemove, onChangeQty }: CartPageProps) => {
 
   return (
     <div className="cart-page">
-      <div style={{ padding: '20px' }}>
+      <div className="cart-inner">
         <h2>Deine Bestellung</h2>
         <div id="cart" className="cart-container">
           {cart.length === 0 ? (

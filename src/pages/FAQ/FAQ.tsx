@@ -3,7 +3,7 @@ import './FAQ.scss';
 export const FAQPage = () => {
   return (
     <div className="faq-page">
-      <main style={{ maxWidth: '1100px', margin: '28px auto', padding: '16px' }}>
+      <main>
         <h1>FAQ</h1>
         <h3>Wie lange dauert die Lieferung?</h3>
         <p>Standardlieferung dauert 2-4 Werktage.</p>

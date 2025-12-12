@@ -1,8 +1,10 @@
 footer.site-footer {
-  background: linear-gradient(135deg, var(--primary-dark) 0%, var(--primary-color) 100%);
+  background: var(--primary-color);
   color: rgba(255, 255, 255, 0.95);
   padding: 40px 0;
   margin-top: auto;
+  border-top: 1px solid var(--primary-dark);
+  box-shadow: 0 -2px 4px rgba(178, 192, 255, 0.2);
 
   .container {
     display: grid;
@@ -20,7 +22,7 @@ footer.site-footer {
       height: 40px;
       width: auto;
       object-fit: contain;
-      filter: brightness(0) invert(1);
+      filter: none;
     }
   }
 
@@ -65,14 +67,11 @@ footer.site-footer {
       }
 
       img {
-        width: 24px;
         height: 24px;
+        width: auto;
+        max-width: 28px;
         object-fit: contain;
-        filter: brightness(0) invert(1);
-      }
-
-      &.whatsapp img {
-        width: 20px;
+        filter: none;
       }
     }
   }

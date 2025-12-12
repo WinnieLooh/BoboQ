@@ -28,9 +28,14 @@ header.header {
 
   .nav-center {
     display: flex;
-    gap: 24px;
+    gap: 20px;
     flex: 1;
     justify-content: center;
+    align-items: center;
+
+    .nav-icons {
+      margin-right: 8px;
+    }
 
     a {
       color: white;
@@ -38,6 +43,9 @@ header.header {
       font-weight: 500;
       transition: color 0.3s ease;
       position: relative;
+      display: flex;
+      align-items: center;
+      height: 36px;
 
       &:hover,
       &.active {
@@ -67,6 +75,24 @@ header.header {
       display: flex;
       align-items: center;
       color: white;
+      position: relative;
+
+      .cart-badge {
+        position: absolute;
+        top: -8px;
+        right: -8px;
+        background: #ff4444;
+        color: white;
+        border-radius: 50%;
+        width: 20px;
+        height: 20px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 11px;
+        font-weight: 700;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+      }
     }
   }
 
@@ -98,19 +124,18 @@ header.header {
       border-radius: 50%;
       transition: background 0.3s ease;
 
+      background: rgba(255, 255, 255, 0.12);
+
       &:hover {
-        background: rgba(255, 255, 255, 0.2);
+        background: rgba(255, 255, 255, 0.22);
       }
 
       img {
-        width: 24px;
         height: 24px;
+        width: auto;
+        max-width: 28px;
         object-fit: contain;
-        filter: brightness(0) invert(1);
-      }
-
-      &.whatsapp img {
-        width: 20px;
+        filter: none;
       }
     }
   }
