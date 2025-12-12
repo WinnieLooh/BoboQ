@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { useAuth } from '../../contexts/AuthContext';
+import { useLanguage } from '../../contexts/LanguageContext';
 import './Auth.scss';
 
 export const RegisterPage = () => {
@@ -12,6 +13,7 @@ export const RegisterPage = () => {
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
   const { register } = useAuth();
+  const { t } = useLanguage();
   const navigate = useNavigate();
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -19,12 +21,12 @@ export const RegisterPage = () => {
     setError('');
 
     if (password !== confirmPassword) {
-      setError('Passwörter stimmen nicht überein');
+      setError(t('passwordMismatch'));
       return;
     }
 
     if (password.length < 6) {
-      setError('Passwort muss mindestens 6 Zeichen lang sein');
+      setError(t('passwordTooShort'));
       return;
     }
 
@@ -34,7 +36,7 @@ export const RegisterPage = () => {
       await register(email, password, firstName, lastName);
       navigate('/');
     } catch (err) {
-      setError('Registrierung fehlgeschlagen. Bitte versuchen Sie es später erneut.');
+      setError(t('registerFailed'));
     } finally {
       setLoading(false);
     }
@@ -44,13 +46,13 @@ export const RegisterPage = () => {
     <div className="auth-page">
       <main>
         <div className="auth-container">
-          <h1>Registrierung</h1>
+          <h1>{t('registerTitle')}</h1>
           
           {error && <div className="error-message">{error}</div>}
           
           <form onSubmit={handleSubmit}>
             <div className="form-group">
-              <label htmlFor="firstName">Vorname</label>
+              <label htmlFor="firstName">{t('firstName')}</label>
               <input
                 id="firstName"
                 type="text"
@@ -61,7 +63,7 @@ export const RegisterPage = () => {
             </div>
 
             <div className="form-group">
-              <label htmlFor="lastName">Nachname</label>
+              <label htmlFor="lastName">{t('lastName')}</label>
               <input
                 id="lastName"
                 type="text"
@@ -72,7 +74,7 @@ export const RegisterPage = () => {
             </div>
 
             <div className="form-group">
-              <label htmlFor="email">E-Mail</label>
+              <label htmlFor="email">{t('email')}</label>
               <input
                 id="email"
                 type="email"
@@ -84,7 +86,7 @@ export const RegisterPage = () => {
             </div>
 
             <div className="form-group">
-              <label htmlFor="password">Passwort</label>
+              <label htmlFor="password">{t('password')}</label>
               <input
                 id="password"
                 type="password"
@@ -96,7 +98,7 @@ export const RegisterPage = () => {
             </div>
 
             <div className="form-group">
-              <label htmlFor="confirmPassword">Passwort wiederholen</label>
+              <label htmlFor="confirmPassword">{t('confirmPassword')}</label>
               <input
                 id="confirmPassword"
                 type="password"
@@ -108,12 +110,12 @@ export const RegisterPage = () => {
             </div>
 
             <button type="submit" className="submit-btn" disabled={loading}>
-              {loading ? 'Wird registriert...' : 'Registrieren'}
+              {loading ? t('signingUp') : t('signUp')}
             </button>
           </form>
 
           <p className="auth-link">
-            Bereits registriert? <Link to="/login">Hier anmelden</Link>
+            {t('alreadyHaveAccount')} <Link to="/login">{t('login')}</Link>
           </p>
         </div>
       </main>

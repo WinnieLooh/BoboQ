@@ -1,4 +1,5 @@
 import type { CartItem } from '../../types';
+import { useLanguage } from '../../contexts/LanguageContext';
 import './CartItem.scss';
 
 interface CartItemComponentProps {
@@ -14,6 +15,7 @@ export const CartItemComponent = ({
   onRemove,
   onChangeQty,
 }: CartItemComponentProps) => {
+  const { t } = useLanguage();
   const itemTotal = item.price * item.qty;
 
   return (
@@ -21,9 +23,9 @@ export const CartItemComponent = ({
       <div className="cart-left">
         <strong>{item.name}</strong>
         <br />
-        <small>Einzelpreis: {item.price.toFixed(2)} €</small>
+        <small>{t('price')}: {item.price.toFixed(2)} €</small>
         <div className="qty-input-wrap">
-          <label htmlFor={`qty-${index}`}>Anzahl: </label>
+          <label htmlFor={`qty-${index}`}>{t('quantity')}: </label>
           <input
             id={`qty-${index}`}
             type="number"
@@ -36,10 +38,10 @@ export const CartItemComponent = ({
       </div>
       <div className="cart-right">
         <button onClick={() => onRemove(index)} className="remove-btn">
-          Entfernen
+          {t('remove')}
         </button>
         <div className="item-total">
-          <div className="item-total-label">Artikel-Summe:</div>
+          <div className="item-total-label">{t('itemSum')}:</div>
           <div className="item-total-value">{itemTotal.toFixed(2)} €</div>
         </div>
       </div>

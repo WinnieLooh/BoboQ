@@ -1,18 +1,27 @@
+import { useLanguage } from '../../contexts/LanguageContext';
 import './FAQ.scss';
 
 export const FAQPage = () => {
+  const { t } = useLanguage();
+
+  const faqs = [
+    { question: 'faqQuestion1', answer: 'faqAnswer1' },
+    { question: 'faqQuestion2', answer: 'faqAnswer2' },
+    { question: 'faqQuestion3', answer: 'faqAnswer3' },
+    { question: 'faqQuestion4', answer: 'faqAnswer4' },
+    { question: 'faqQuestion5', answer: 'faqAnswer5' },
+  ];
+
   return (
     <div className="faq-page">
       <main>
-        <h1>FAQ</h1>
-        <h3>Wie lange dauert die Lieferung?</h3>
-        <p>Standardlieferung dauert 2-4 Werktage.</p>
-
-        <h3>Wie kann ich bestellen?</h3>
-        <p>Wähle Produkte im Shop und füge sie dem Warenkorb hinzu.</p>
-
-        <h3>Gibt es Allergene?</h3>
-        <p>Bitte kontaktiere uns per E-Mail für Details zu Allergenen.</p>
+        <h1>{t('frequentlyAsked')}</h1>
+        {faqs.map((faq, index) => (
+          <div key={index}>
+            <h3>{t(faq.question as any)}</h3>
+            <p>{t(faq.answer as any)}</p>
+          </div>
+        ))}
       </main>
     </div>
   );

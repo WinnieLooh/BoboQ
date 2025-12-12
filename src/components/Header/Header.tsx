@@ -205,13 +205,14 @@ export const Header = ({ cart, onRemoveFromCart, onChangeQty }: HeaderProps) => 
                               onChangeQty?.(index, newQty);
                             }}
                             className="qty-input"
+                            aria-label={`${item.name} ${t('quantity')}`}
                           />
                           <span className="item-price">× {item.price.toFixed(2)} €</span>
                           <button 
                             onClick={() => onRemoveFromCart?.(index)}
                             className="remove-btn"
-                            aria-label="Aus Warenkorb entfernen"
-                            title="Entfernen"
+                            aria-label={t('remove')}
+                            title={t('remove')}
                           >
                             🗑️
                           </button>
@@ -264,14 +265,14 @@ export const Header = ({ cart, onRemoveFromCart, onChangeQty }: HeaderProps) => 
                 );})}
                 {filteredProducts.length > 5 && (
                   <div className="search-results-more">
-                    +{filteredProducts.length - 5} weitere Ergebnisse
+                    +{filteredProducts.length - 5} {t('moreResults')}
                   </div>
                 )}
               </div>
             )}
             {showSearchResults && searchQuery.trim().length > 0 && filteredProducts.length === 0 && (
               <div className="search-results">
-                <div className="search-no-results">Keine Produkte gefunden</div>
+                <div className="search-no-results">{t('noProductsFound')}</div>
               </div>
             )}
           </div>
@@ -290,12 +291,12 @@ export const Header = ({ cart, onRemoveFromCart, onChangeQty }: HeaderProps) => 
                   navigate('/');
                 }}
               >
-                Abmelden
+                {t('logout')}
               </button>
             </div>
           ) : (
             <Link to="/login" className="login-btn">
-              Anmelden
+              {t('signIn')}
             </Link>
           )}
           <button 

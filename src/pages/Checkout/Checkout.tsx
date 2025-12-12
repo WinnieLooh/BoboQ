@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../../contexts/AuthContext';
+import { useLanguage } from '../../contexts/LanguageContext';
 import './Checkout.scss';
 
 interface CheckoutProps {
@@ -12,6 +13,7 @@ const SHIPPING_COST = 5.99;
 
 export const CheckoutPage = ({ cart, onCheckoutComplete }: CheckoutProps) => {
   const { user, token } = useAuth();
+  const { t } = useLanguage();
   const [guestEmail, setGuestEmail] = useState('');
   const [guestFirstName, setGuestFirstName] = useState('');
   const [guestLastName, setGuestLastName] = useState('');
@@ -34,17 +36,17 @@ export const CheckoutPage = ({ cart, onCheckoutComplete }: CheckoutProps) => {
     setSuccessMessage('');
 
     if (!address || !city || !postalCode || !country) {
-      setError('Bitte füllen Sie alle Felder aus');
+      setError(t('fillAllFields'));
       return;
     }
 
     if (!isGuestCheckout && !token) {
-      setError('Bitte melden Sie sich an oder bestellen Sie als Gast');
+      setError(t('authOrGuest'));
       return;
     }
 
     if (isGuestCheckout && (!guestEmail || !guestFirstName || !guestLastName)) {
-      setError('Bitte füllen Sie alle erforderlichen Felder aus');
+      setError(t('requiredFields'));
       return;
     }
 
@@ -82,7 +84,7 @@ export const CheckoutPage = ({ cart, onCheckoutComplete }: CheckoutProps) => {
       onCheckoutComplete();
       setTimeout(() => navigate('/'), 2000);
     } catch {
-      setError('Ein Fehler ist aufgetreten. Bitte versuchen Sie es später erneut.');
+      setError(t('orderError'));
     } finally {
       setLoading(false);
     }
@@ -92,21 +94,21 @@ export const CheckoutPage = ({ cart, onCheckoutComplete }: CheckoutProps) => {
     return (
       <div className="checkout-page">
         <main>
-          <h1>Kasse</h1>
+          <h1>{t('checkout')}</h1>
           <div className="auth-options">
             <div className="option">
-              <h2>Registrierter Kunde</h2>
-              <p>Mit Ihrem BoboQ Konto bestellen</p>
+              <h2>{t('registeredCustomer')}</h2>
+              <p>{t('registerToOrder')}</p>
               <button onClick={() => navigate('/login')} className="option-btn login-btn">
-                Zur Anmeldung
+                {t('selectCheckout')}
               </button>
             </div>
             <div className="divider"></div>
             <div className="option">
-              <h2>Gast Bestellung</h2>
-              <p>Ohne Konto als Gast bestellen</p>
+              <h2>{t('guestCheckout')}</h2>
+              <p>{t('guestCheckoutDesc')}</p>
               <button onClick={() => setIsGuestCheckout(true)} className="option-btn guest-btn">
-                Als Gast bestellen
+                {t('orderAsGuest')}
               </button>
             </div>
           </div>
@@ -122,7 +124,7 @@ export const CheckoutPage = ({ cart, onCheckoutComplete }: CheckoutProps) => {
 
         <div className="checkout-container">
           <div className="checkout-form">
-            <h2>Lieferadresse</h2>
+            <h2>{t('shippingAddress')}</h2>
 
             {isGuestCheckout && (
               <button 
@@ -130,7 +132,7 @@ export const CheckoutPage = ({ cart, onCheckoutComplete }: CheckoutProps) => {
                 className="back-link"
                 type="button"
               >
-                ← Zurück
+                {t('back')}
               </button>
             )}
 
@@ -142,7 +144,7 @@ export const CheckoutPage = ({ cart, onCheckoutComplete }: CheckoutProps) => {
                 <>
                   <div className="form-row">
                     <div className="form-group">
-                      <label htmlFor="guestFirstName">Vorname</label>
+                      <label htmlFor="guestFirstName">{t('firstName')}</label>
                       <input
                         id="guestFirstName"
                         type="text"
@@ -152,7 +154,7 @@ export const CheckoutPage = ({ cart, onCheckoutComplete }: CheckoutProps) => {
                       />
                     </div>
                     <div className="form-group">
-                      <label htmlFor="guestLastName">Nachname</label>
+                      <label htmlFor="guestLastName">{t('lastName')}</label>
                       <input
                         id="guestLastName"
                         type="text"
@@ -164,7 +166,7 @@ export const CheckoutPage = ({ cart, onCheckoutComplete }: CheckoutProps) => {
                   </div>
 
                   <div className="form-group">
-                    <label htmlFor="guestEmail">E-Mail</label>
+                    <label htmlFor="guestEmail">{t('email')}</label>
                     <input
                       id="guestEmail"
                       type="email"
@@ -176,7 +178,7 @@ export const CheckoutPage = ({ cart, onCheckoutComplete }: CheckoutProps) => {
                 </>
               ) : (
                 <div className="form-group">
-                  <label htmlFor="name">Name</label>
+                  <label htmlFor="name">{t('firstName')} {t('lastName')}</label>
                   <input
                     id="name"
                     type="text"
@@ -187,7 +189,7 @@ export const CheckoutPage = ({ cart, onCheckoutComplete }: CheckoutProps) => {
               )}
 
               <div className="form-group">
-                <label htmlFor="address">Straße und Hausnummer</label>
+                <label htmlFor="address">{t('street')}</label>
                 <input
                   id="address"
                   type="text"
@@ -199,7 +201,7 @@ export const CheckoutPage = ({ cart, onCheckoutComplete }: CheckoutProps) => {
 
               <div className="form-row">
                 <div className="form-group">
-                  <label htmlFor="postalCode">Postleitzahl</label>
+                  <label htmlFor="postalCode">{t('postalCode')}</label>
                   <input
                     id="postalCode"
                     type="text"
@@ -210,7 +212,7 @@ export const CheckoutPage = ({ cart, onCheckoutComplete }: CheckoutProps) => {
                 </div>
 
                 <div className="form-group">
-                  <label htmlFor="city">Stadt</label>
+                  <label htmlFor="city">{t('city')}</label>
                   <input
                     id="city"
                     type="text"
@@ -222,7 +224,7 @@ export const CheckoutPage = ({ cart, onCheckoutComplete }: CheckoutProps) => {
               </div>
 
               <div className="form-group">
-                <label htmlFor="country">Land</label>
+                <label htmlFor="country">{t('country')}</label>
                 <input
                   id="country"
                   type="text"
@@ -233,13 +235,13 @@ export const CheckoutPage = ({ cart, onCheckoutComplete }: CheckoutProps) => {
               </div>
 
               <button type="submit" className="checkout-btn" disabled={loading}>
-                {loading ? 'Wird verarbeitet...' : 'Bestellung abschließen'}
+                {loading ? t('processing') : t('placeOrder')}
               </button>
             </form>
           </div>
 
           <div className="order-summary">
-            <h2>Bestellübersicht</h2>
+            <h2>{t('orderSummary')}</h2>
 
             <div className="items">
               {cart.map((item, index) => (
@@ -256,17 +258,17 @@ export const CheckoutPage = ({ cart, onCheckoutComplete }: CheckoutProps) => {
             <div className="summary-divider"></div>
 
             <div className="summary-row subtotal">
-              <span>Zwischensumme:</span>
+              <span>{t('subtotalLabel')}:</span>
               <span>{subtotal.toFixed(2)} €</span>
             </div>
 
             <div className="summary-row shipping">
-              <span>Versandkosten:</span>
+              <span>{t('shippingCosts')}:</span>
               <span>{SHIPPING_COST.toFixed(2)} €</span>
             </div>
 
             <div className="summary-row total">
-              <span>Gesamtsumme:</span>
+              <span>{t('totalPrice')}:</span>
               <span className="total-price">{totalPrice.toFixed(2)} €</span>
             </div>
           </div>
