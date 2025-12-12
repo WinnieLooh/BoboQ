@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom';
+import { useState } from 'react';
 import './Header.scss';
 
 const img = (file: string) => `${import.meta.env.BASE_URL}images/${file}`;
@@ -9,6 +10,8 @@ interface HeaderProps {
 
 export const Header = ({ cart }: HeaderProps) => {
   const totalItems = cart.reduce((sum, item) => sum + item.qty, 0);
+  const totalPrice = cart.reduce((sum, item) => sum + item.price * item.qty, 0);
+  const [showPreview, setShowPreview] = useState(false);
 
   return (
     <header className="header">
@@ -36,10 +39,45 @@ export const Header = ({ cart }: HeaderProps) => {
           <Link to="/faq">FAQ</Link>
         </nav>
         <div className="nav-right">
-          <Link to="/cart" className="cart">
-            🛒
-            {totalItems > 0 && <span className="cart-badge">{totalItems}</span>}
-          </Link>
+          <div
+            className="cart-wrapper"
+            onMouseEnter={() => setShowPreview(true)}
+            onMouseLeave={() => setShowPreview(false)}
+          >
+            <Link to="/cart" className="cart">
+              🛒
+              {totalItems > 0 && <span className="cart-badge">{totalItems}</span>}
+            </Link>
+            {showPreview && totalItems > 0 && (
+              <div className="cart-preview">
+                <div className="cart-preview-header">
+                  Warenkorb ({totalItems} {totalItems === 1 ? 'Artikel' : 'Artikel'})
+                </div>
+                <div className="cart-preview-items">
+                  {cart.map((item, index) => (
+                    <div key={index} className="cart-preview-item">
+                      <div className="item-info">
+                        <div className="item-name">{item.name}</div>
+                        <div className="item-qty">{item.qty} × {item.price.toFixed(2)} €</div>
+                      </div>
+                      <div className="item-total">
+                        {(item.price * item.qty).toFixed(2)} €
+                      </div>
+                    </div>
+                  ))}
+                </div>
+                <div className="cart-preview-footer">
+                  <div className="preview-total">
+                    <span>Gesamt:</span>
+                    <span className="total-price">{totalPrice.toFixed(2)} €</span>
+                  </div>
+                  <Link to="/cart" className="view-cart-btn">
+                    Zum Warenkorb
+                  </Link>
+                </div>
+              </div>
+            )}
+          </div>
           <div className="nav-search">
             <input type="search" placeholder="Suchen..." aria-label="Suche" />
           </div>
