@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom';
 import './Header.scss';
 
-const img = (file: string) => `/images/${file}`;
+const img = (file: string) => `${import.meta.env.BASE_URL}images/${file}`;
 
 interface HeaderProps {
   cart: { name: string; price: number; qty: number }[];

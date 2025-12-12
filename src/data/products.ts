@@ -1,6 +1,6 @@
 import type { Product } from '../types';
 
-const img = (file: string) => `/images/${file}`;
+const img = (file: string) => `${import.meta.env.BASE_URL}images/${file}`;
 
 export const products: Product[] = [
   // Boba
