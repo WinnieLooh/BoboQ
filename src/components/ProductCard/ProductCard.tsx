@@ -6,7 +6,7 @@ import { useLanguage } from '../../contexts/LanguageContext';
 
 interface ProductCardProps {
   product: Product;
-  onAddToCart: (name: string, price: number, qty: number) => void;
+  onAddToCart: (productId: string, name: string, price: number, qty: number) => void;
 }
 
 export const ProductCard = ({ product, onAddToCart }: ProductCardProps) => {
@@ -16,7 +16,7 @@ export const ProductCard = ({ product, onAddToCart }: ProductCardProps) => {
 
   const handleAddToCart = () => {
     setIsAdding(true);
-    onAddToCart(product.name, product.price, quantity);
+    onAddToCart(product.id, product.name, product.price, quantity);
     setQuantity(1);
     setTimeout(() => setIsAdding(false), 600);
   };

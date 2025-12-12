@@ -1,10 +1,25 @@
 import { useState, useEffect } from 'react';
+import { products } from '../data/products';
 import type { CartItem } from '../types';
 
 const loadCartFromStorage = (): CartItem[] => {
   try {
     const saved = localStorage.getItem('cart');
-    return saved ? (JSON.parse(saved) as CartItem[]) : [];
+    const parsed = saved ? (JSON.parse(saved) as Partial<CartItem>[]) : [];
+
+    // Ensure legacy cart entries gain productId for translations/merging
+    return parsed.map((item) => {
+      if (!item.productId) {
+        const match = products.find((p) => p.name === item.name);
+        return {
+          productId: match?.id || item.name || 'unknown',
+          name: item.name || 'Unknown',
+          price: item.price || 0,
+          qty: item.qty || 1,
+        } as CartItem;
+      }
+      return item as CartItem;
+    });
   } catch (e) {
     console.error('Failed to parse cart from localStorage', e);
     return [];
@@ -19,15 +34,20 @@ export const useCart = () => {
     localStorage.setItem('cart', JSON.stringify(cart));
   }, [cart]);
 
-  const addToCart = (name: string, price: number, qty: number = 1) => {
+  const addToCart = (
+    productId: string,
+    name: string,
+    price: number,
+    qty: number = 1
+  ) => {
     setCart((prevCart) => {
-      const idx = prevCart.findIndex((i) => i.name === name);
+      const idx = prevCart.findIndex((i) => i.productId === productId);
       if (idx > -1) {
         const updated = [...prevCart];
         updated[idx].qty += qty;
         return updated;
       } else {
-        return [...prevCart, { name, price, qty }];
+        return [...prevCart, { productId, name, price, qty }];
       }
     });
   };

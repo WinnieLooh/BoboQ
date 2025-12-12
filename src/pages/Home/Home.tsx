@@ -7,7 +7,7 @@ import './Home.scss';
 const hero = `${import.meta.env.BASE_URL}images/hero.jpg`;
 
 interface HomePageProps {
-  onAddToCart: (name: string, price: number, qty: number) => void;
+  onAddToCart: (productId: string, name: string, price: number, qty: number) => void;
 }
 
 export const HomePage = ({ onAddToCart }: HomePageProps) => {
@@ -83,7 +83,7 @@ export const HomePage = ({ onAddToCart }: HomePageProps) => {
   const handleAddToCart = (product: typeof products[0], e: React.MouseEvent) => {
     e.preventDefault();
     e.stopPropagation();
-    onAddToCart(product.name, product.price, 1);
+    onAddToCart(product.id, product.name, product.price, 1);
     setAddingId(product.id);
     setTimeout(() => setAddingId(null), 600);
   };
@@ -98,6 +98,7 @@ export const HomePage = ({ onAddToCart }: HomePageProps) => {
       </div>
 
       <div className="layout">
+        <div className="hero-spacer" aria-hidden="true"></div>
         <main className="main">
           <h2 className="title-center">{t('productsTitle')}</h2>
 

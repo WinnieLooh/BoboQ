@@ -10,7 +10,7 @@ import './Header.scss';
 const img = (file: string) => `${import.meta.env.BASE_URL}images/${file}`;
 
 interface HeaderProps {
-  cart: { name: string; price: number; qty: number }[];
+  cart: { productId: string; name: string; price: number; qty: number }[];
   onRemoveFromCart?: (index: number) => void;
   onChangeQty?: (index: number, qty: number) => void;
 }
@@ -191,10 +191,12 @@ export const Header = ({ cart, onRemoveFromCart, onChangeQty }: HeaderProps) => 
                   {t('cart')} ({totalItems} {t('articles')})
                 </div>
                 <div className="cart-preview-items">
-                  {cart.map((item, index) => (
+                  {cart.map((item, index) => {
+                    const displayName = tp(item.productId, item.name);
+                    return (
                     <div key={index} className="cart-preview-item">
                       <div className="item-info">
-                        <div className="item-name">{item.name}</div>
+                        <div className="item-name">{displayName}</div>
                         <div className="item-controls">
                           <input 
                             type="number" 
@@ -205,7 +207,7 @@ export const Header = ({ cart, onRemoveFromCart, onChangeQty }: HeaderProps) => 
                               onChangeQty?.(index, newQty);
                             }}
                             className="qty-input"
-                            aria-label={`${item.name} ${t('quantity')}`}
+                            aria-label={`${displayName} ${t('quantity')}`}
                           />
                           <span className="item-price">× {item.price.toFixed(2)} €</span>
                           <button 
@@ -222,7 +224,7 @@ export const Header = ({ cart, onRemoveFromCart, onChangeQty }: HeaderProps) => 
                         {(item.price * item.qty).toFixed(2)} €
                       </div>
                     </div>
-                  ))}
+                  );})}
                 </div>
                 <div className="cart-preview-footer">
                   <div className="preview-total">

@@ -15,13 +15,14 @@ export const CartItemComponent = ({
   onRemove,
   onChangeQty,
 }: CartItemComponentProps) => {
-  const { t } = useLanguage();
+  const { t, tp } = useLanguage();
   const itemTotal = item.price * item.qty;
+  const displayName = tp(item.productId, item.name);
 
   return (
     <div className="cart-item">
       <div className="cart-left">
-        <strong>{item.name}</strong>
+        <strong>{displayName}</strong>
         <br />
         <small>{t('price')}: {item.price.toFixed(2)} €</small>
         <div className="qty-input-wrap">

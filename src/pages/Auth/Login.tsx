@@ -21,7 +21,7 @@ export const LoginPage = () => {
     try {
       await login(email, password);
       navigate('/');
-    } catch (err) {
+    } catch {
       setError(t('loginFailed'));
     } finally {
       setLoading(false);

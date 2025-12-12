@@ -5,7 +5,7 @@ import { useLanguage } from '../../contexts/LanguageContext';
 import './Checkout.scss';
 
 interface CheckoutProps {
-  cart: { name: string; price: number; qty: number }[];
+  cart: { productId: string; name: string; price: number; qty: number }[];
   onCheckoutComplete: () => void;
 }
 
@@ -13,7 +13,7 @@ const SHIPPING_COST = 5.99;
 
 export const CheckoutPage = ({ cart, onCheckoutComplete }: CheckoutProps) => {
   const { user, token } = useAuth();
-  const { t } = useLanguage();
+  const { t, tp } = useLanguage();
   const [guestEmail, setGuestEmail] = useState('');
   const [guestFirstName, setGuestFirstName] = useState('');
   const [guestLastName, setGuestLastName] = useState('');
@@ -244,15 +244,17 @@ export const CheckoutPage = ({ cart, onCheckoutComplete }: CheckoutProps) => {
             <h2>{t('orderSummary')}</h2>
 
             <div className="items">
-              {cart.map((item, index) => (
+              {cart.map((item, index) => {
+                const displayName = tp(item.productId, item.name);
+                return (
                 <div key={index} className="item">
                   <div className="item-info">
-                    <span className="item-name">{item.name}</span>
+                    <span className="item-name">{displayName}</span>
                     <span className="item-qty">x {item.qty}</span>
                   </div>
                   <span className="item-price">{(item.price * item.qty).toFixed(2)} €</span>
                 </div>
-              ))}
+              );})}
             </div>
 
             <div className="summary-divider"></div>

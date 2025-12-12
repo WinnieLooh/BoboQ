@@ -4,7 +4,7 @@ import { products } from '../../data/products';
 import './ProductDetail.scss';
 
 interface ProductDetailPageProps {
-  onAddToCart: (name: string, price: number, qty: number) => void;
+  onAddToCart: (productId: string, name: string, price: number, qty: number) => void;
 }
 
 export function ProductDetailPage({ onAddToCart }: ProductDetailPageProps) {
@@ -26,7 +26,7 @@ export function ProductDetailPage({ onAddToCart }: ProductDetailPageProps) {
     );
   }
 
-  const handleAddToCart = () => onAddToCart(product.name, product.price, quantity);
+  const handleAddToCart = () => onAddToCart(product.id, product.name, product.price, quantity);
 
   return (
     <div className="product-detail-page">

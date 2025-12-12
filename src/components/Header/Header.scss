@@ -325,7 +325,8 @@ header.header {
                 border: 1px solid var(--border-color);
                 border-radius: 4px;
                 background: var(--bg-color);
-                color: var(--text-color);
+                -moz-appearance: textfield;
+                appearance: textfield;
                 font-size: 12px;
                 text-align: center;
                 font-weight: 500;
@@ -345,6 +346,7 @@ header.header {
 
                 &[type='number'] {
                   -moz-appearance: textfield;
+                  appearance: textfield;
                 }
               }
 

@@ -35,7 +35,7 @@ export const RegisterPage = () => {
     try {
       await register(email, password, firstName, lastName);
       navigate('/');
-    } catch (err) {
+    } catch {
       setError(t('registerFailed'));
     } finally {
       setLoading(false);

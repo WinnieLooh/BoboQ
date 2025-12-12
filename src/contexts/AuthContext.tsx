@@ -19,22 +19,30 @@ interface AuthContextType {
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
 export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
-  const [user, setUser] = useState<User | null>(null);
-  const [token, setToken] = useState<string | null>(null);
+  const [token, setToken] = useState<string | null>(() => localStorage.getItem('authToken'));
+  const [user, setUser] = useState<User | null>(() => {
+    const savedUser = localStorage.getItem('user');
+    return savedUser ? JSON.parse(savedUser) : null;
+  });
 
   const API_URL = 'http://localhost:5000/api';
 
-  // Load token and user from localStorage on mount
+  // Keep localStorage in sync with auth state
   useEffect(() => {
-    const savedToken = localStorage.getItem('authToken');
-    const savedUser = localStorage.getItem('user');
-    if (savedToken) {
-      setToken(savedToken);
-      if (savedUser) {
-        setUser(JSON.parse(savedUser));
-      }
+    if (token) {
+      localStorage.setItem('authToken', token);
+    } else {
+      localStorage.removeItem('authToken');
     }
-  }, []);
+  }, [token]);
+
+  useEffect(() => {
+    if (user) {
+      localStorage.setItem('user', JSON.stringify(user));
+    } else {
+      localStorage.removeItem('user');
+    }
+  }, [user]);
 
   const login = async (email: string, password: string) => {
     const response = await fetch(`${API_URL}/auth/login`, {
@@ -95,8 +103,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
       throw new Error('Failed to update profile');
     }
 
-    setUser((prev) => prev ? { ...prev, ...data } : null);
-    localStorage.setItem('user', JSON.stringify(user));
+    setUser((prev) => (prev ? { ...prev, ...data } : null));
   };
 
   return (
@@ -106,6 +113,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   );
 };
 
+// eslint-disable-next-line react-refresh/only-export-components
 export const useAuth = () => {
   const context = useContext(AuthContext);
   if (!context) {

@@ -7,7 +7,7 @@ import type { FilterCategory } from '../../types';
 import './Shop.scss';
 
 interface ShopPageProps {
-  onAddToCart: (name: string, price: number, qty: number) => void;
+  onAddToCart: (productId: string, name: string, price: number, qty: number) => void;
 }
 
 export const ShopPage = ({ onAddToCart }: ShopPageProps) => {

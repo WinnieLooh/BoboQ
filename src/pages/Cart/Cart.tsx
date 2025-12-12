@@ -47,7 +47,7 @@ export const CartPage = ({ cart, onRemove, onChangeQty }: CartPageProps) => {
                     <span>{subtotal.toFixed(2)} €</span>
                   </div>
                   <div className="price-row shipping">
-                    <span>Versandkosten:</span>
+                    <span>{t('shippingCosts')}:</span>
                     <span>{SHIPPING_COST.toFixed(2)} €</span>
                   </div>
                 </div>
