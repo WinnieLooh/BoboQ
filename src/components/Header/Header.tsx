@@ -3,6 +3,7 @@ import { useState, useRef, useEffect } from 'react';
 import { products } from '../../data/products';
 import type { Product } from '../../types';
 import { useLanguage } from '../../contexts/LanguageContext';
+import { useAuth } from '../../contexts/AuthContext';
 import type { Language } from '../../i18n';
 import './Header.scss';
 
@@ -17,6 +18,7 @@ interface HeaderProps {
 export const Header = ({ cart, onRemoveFromCart, onChangeQty }: HeaderProps) => {
   const navigate = useNavigate();
   const { t, tp, language, setLanguage } = useLanguage();
+  const { user, logout } = useAuth();
   const totalItems = cart.length;
   const totalPrice = cart.reduce((sum, item) => sum + item.price * item.qty, 0);
   const [showPreview, setShowPreview] = useState(false);
@@ -273,6 +275,29 @@ export const Header = ({ cart, onRemoveFromCart, onChangeQty }: HeaderProps) => 
               </div>
             )}
           </div>
+          {user ? (
+            <div className="auth-menu">
+              <button 
+                className="user-btn"
+                title={`${user.firstName} ${user.lastName}`}
+              >
+                👤 {user.firstName}
+              </button>
+              <button 
+                className="logout-btn"
+                onClick={() => {
+                  logout();
+                  navigate('/');
+                }}
+              >
+                Abmelden
+              </button>
+            </div>
+          ) : (
+            <Link to="/login" className="login-btn">
+              Anmelden
+            </Link>
+          )}
           <button 
             className="theme-toggle"
             onClick={toggleTheme}

@@ -22,6 +22,30 @@
       margin-top: 24px;
       box-shadow: 0 2px 8px var(--shadow-color);
 
+      .price-breakdown {
+        margin-bottom: 16px;
+        padding-bottom: 12px;
+        border-bottom: 1px solid var(--border-color);
+        text-align: right;
+
+        .price-row {
+          display: flex;
+          justify-content: space-between;
+          font-size: 14px;
+          color: var(--text-color);
+          margin-bottom: 8px;
+
+          &.subtotal {
+            font-weight: 500;
+          }
+
+          &.shipping {
+            color: var(--primary-color);
+            font-weight: 600;
+          }
+        }
+      }
+
       h3 {
         color: var(--text-color);
         font-size: 20px;

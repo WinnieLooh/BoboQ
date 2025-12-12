@@ -1,7 +1,10 @@
 import { CartItemComponent } from '../../components/CartItem/CartItem';
 import { useLanguage } from '../../contexts/LanguageContext';
+import { useNavigate } from 'react-router-dom';
 import type { CartItem } from '../../types';
 import './Cart.scss';
+
+const SHIPPING_COST = 5.99;
 
 interface CartPageProps {
   cart: CartItem[];
@@ -11,7 +14,13 @@ interface CartPageProps {
 
 export const CartPage = ({ cart, onRemove, onChangeQty }: CartPageProps) => {
   const { t } = useLanguage();
-  const total = cart.reduce((sum, item) => sum + item.price * item.qty, 0);
+  const navigate = useNavigate();
+  const subtotal = cart.reduce((sum, item) => sum + item.price * item.qty, 0);
+  const total = subtotal + SHIPPING_COST;
+
+  const handleCheckout = () => {
+    navigate('/checkout');
+  };
 
   return (
     <div className="cart-page">
@@ -32,9 +41,19 @@ export const CartPage = ({ cart, onRemove, onChangeQty }: CartPageProps) => {
                 />
               ))}
               <div className="cart-total">
+                <div className="price-breakdown">
+                  <div className="price-row subtotal">
+                    <span>{t('subtotal')}:</span>
+                    <span>{subtotal.toFixed(2)} €</span>
+                  </div>
+                  <div className="price-row shipping">
+                    <span>Versandkosten:</span>
+                    <span>{SHIPPING_COST.toFixed(2)} €</span>
+                  </div>
+                </div>
                 <h3 id="total">{t('totalAmount')}: {total.toFixed(2)} €</h3>
                 <div className="cart-actions">
-                  <button className="checkout-btn" onClick={() => alert(t('checkoutSoon'))}>
+                  <button className="checkout-btn" onClick={handleCheckout}>
                     {t('checkoutBtn')}
                   </button>
                   <button className="quote-btn" onClick={() => alert(t('quoteSent'))}>

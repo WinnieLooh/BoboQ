@@ -35,13 +35,13 @@ export const CartItemComponent = ({
         </div>
       </div>
       <div className="cart-right">
+        <button onClick={() => onRemove(index)} className="remove-btn">
+          Entfernen
+        </button>
         <div className="item-total">
           <div className="item-total-label">Artikel-Summe:</div>
           <div className="item-total-value">{itemTotal.toFixed(2)} €</div>
         </div>
-        <button onClick={() => onRemove(index)} className="remove-btn">
-          Entfernen
-        </button>
       </div>
     </div>
   );
