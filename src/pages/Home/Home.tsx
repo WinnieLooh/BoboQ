@@ -115,6 +115,7 @@ export const HomePage = ({ onAddToCart }: HomePageProps) => {
             })}
           </div>
 
+          <div className="featured-spacer" aria-hidden="true"></div>
           <h2 className="title-center">{t('featuredProducts')}</h2>
 
           <div className="carousel-container">
