@@ -5,9 +5,14 @@ import './Home.scss';
 
 const hero = `${import.meta.env.BASE_URL}images/hero.jpg`;
 
-export const HomePage = () => {
+interface HomePageProps {
+  onAddToCart: (name: string, price: number, qty: number) => void;
+}
+
+export const HomePage = ({ onAddToCart }: HomePageProps) => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isResetting, setIsResetting] = useState(false);
+  const [addingId, setAddingId] = useState<string | null>(null);
   const carouselRef = useRef<HTMLDivElement>(null);
   const displayProducts = products.slice(0, 8);
   const visibleCount = 4;
@@ -73,6 +78,14 @@ export const HomePage = () => {
     return () => cancelAnimationFrame(id);
   }, [isResetting]);
 
+  const handleAddToCart = (product: typeof products[0], e: React.MouseEvent) => {
+    e.preventDefault();
+    e.stopPropagation();
+    onAddToCart(product.name, product.price, 1);
+    setAddingId(product.id);
+    setTimeout(() => setAddingId(null), 600);
+  };
+
   return (
     <div className="home-page">
       <div className="hero">
@@ -116,6 +129,13 @@ export const HomePage = () => {
                     <h3>{product.name}</h3>
                     <p>{product.price.toFixed(2)} €</p>
                   </Link>
+                  <button
+                    className={`add-to-cart-btn ${addingId === product.id ? 'adding' : ''}`}
+                    onClick={(e) => handleAddToCart(product, e)}
+                    disabled={addingId === product.id}
+                  >
+                    {addingId === product.id ? '✓ Hinzugefügt' : '🛒 In den Warenkorb'}
+                  </button>
                 </div>
               ))}
             </div>

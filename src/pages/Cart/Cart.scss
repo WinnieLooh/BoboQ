@@ -58,13 +58,13 @@
         }
 
         .quote-btn {
-          background: white;
+          background: var(--bg-white);
           color: var(--primary-color);
           border: 2px solid var(--primary-color);
 
           &:hover {
             background: var(--primary-light);
-            box-shadow: 0 4px 12px rgba(180, 130, 200, 0.15);
+            box-shadow: 0 4px 12px var(--shadow-hover);
           }
         }
       }

@@ -20,7 +20,7 @@ function App() {
         <Header cart={cart} />
         <main className="main-content">
           <Routes>
-            <Route path="/" element={<HomePage />} />
+            <Route path="/" element={<HomePage onAddToCart={addToCart} />} />
             <Route path="/shop" element={<ShopPage onAddToCart={addToCart} />} />
             <Route
               path="/product/:id"

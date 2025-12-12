@@ -1,5 +1,7 @@
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useState, useRef, useEffect } from 'react';
+import { products } from '../../data/products';
+import type { Product } from '../../types';
 import './Header.scss';
 
 const img = (file: string) => `${import.meta.env.BASE_URL}images/${file}`;
@@ -9,10 +11,20 @@ interface HeaderProps {
 }
 
 export const Header = ({ cart }: HeaderProps) => {
+  const navigate = useNavigate();
   const totalItems = cart.reduce((sum, item) => sum + item.qty, 0);
   const totalPrice = cart.reduce((sum, item) => sum + item.price * item.qty, 0);
   const [showPreview, setShowPreview] = useState(false);
+  const [searchQuery, setSearchQuery] = useState('');
+  const [showSearchResults, setShowSearchResults] = useState(false);
+  const [filteredProducts, setFilteredProducts] = useState<Product[]>([]);
+  const [isDarkMode, setIsDarkMode] = useState(() => {
+    const saved = localStorage.getItem('theme');
+    if (saved) return saved === 'dark';
+    return window.matchMedia('(prefers-color-scheme: dark)').matches;
+  });
   const timeoutRef = useRef<number | null>(null);
+  const searchTimeoutRef = useRef<number | null>(null);
 
   const handleMouseEnter = () => {
     if (timeoutRef.current) {
@@ -33,8 +45,61 @@ export const Header = ({ cart }: HeaderProps) => {
       if (timeoutRef.current) {
         clearTimeout(timeoutRef.current);
       }
+      if (searchTimeoutRef.current) {
+        clearTimeout(searchTimeoutRef.current);
+      }
     };
   }, []);
+
+  useEffect(() => {
+    if (isDarkMode) {
+      document.documentElement.classList.add('dark-mode');
+      document.documentElement.classList.remove('light-mode');
+    } else {
+      document.documentElement.classList.add('light-mode');
+      document.documentElement.classList.remove('dark-mode');
+    }
+    localStorage.setItem('theme', isDarkMode ? 'dark' : 'light');
+  }, [isDarkMode]);
+
+  const toggleTheme = () => {
+    setIsDarkMode(!isDarkMode);
+  };
+
+  const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const query = e.target.value;
+    setSearchQuery(query);
+
+    if (searchTimeoutRef.current) {
+      clearTimeout(searchTimeoutRef.current);
+    }
+
+    if (query.trim().length > 0) {
+      searchTimeoutRef.current = window.setTimeout(() => {
+        const results = products.filter((product) =>
+          product.name.toLowerCase().includes(query.toLowerCase())
+        );
+        setFilteredProducts(results);
+        setShowSearchResults(true);
+      }, 200);
+    } else {
+      setFilteredProducts([]);
+      setShowSearchResults(false);
+    }
+  };
+
+  const handleSearchResultClick = (productId: string) => {
+    setSearchQuery('');
+    setShowSearchResults(false);
+    navigate(`/product/${productId}`);
+  };
+
+  const handleSearchBlur = () => {
+    // Delay to allow click on results
+    setTimeout(() => {
+      setShowSearchResults(false);
+    }, 200);
+  };
 
   return (
     <header className="header">
@@ -106,8 +171,51 @@ export const Header = ({ cart }: HeaderProps) => {
             )}
           </div>
           <div className="nav-search">
-            <input type="search" placeholder="Suchen..." aria-label="Suche" />
+            <input 
+              type="search" 
+              placeholder="Suchen..." 
+              aria-label="Suche"
+              value={searchQuery}
+              onChange={handleSearchChange}
+              onFocus={() => searchQuery.trim().length > 0 && setShowSearchResults(true)}
+              onBlur={handleSearchBlur}
+            />
+            {showSearchResults && filteredProducts.length > 0 && (
+              <div className="search-results">
+                {filteredProducts.slice(0, 5).map((product) => (
+                  <div
+                    key={product.id}
+                    className="search-result-item"
+                    onClick={() => handleSearchResultClick(product.id)}
+                  >
+                    <img src={product.image} alt={product.name} className="result-image" />
+                    <div className="result-info">
+                      <div className="result-name">{product.name}</div>
+                      <div className="result-price">{product.price.toFixed(2)} €</div>
+                    </div>
+                  </div>
+                ))}
+                {filteredProducts.length > 5 && (
+                  <div className="search-results-more">
+                    +{filteredProducts.length - 5} weitere Ergebnisse
+                  </div>
+                )}
+              </div>
+            )}
+            {showSearchResults && searchQuery.trim().length > 0 && filteredProducts.length === 0 && (
+              <div className="search-results">
+                <div className="search-no-results">Keine Produkte gefunden</div>
+              </div>
+            )}
           </div>
+          <button 
+            className="theme-toggle"
+            onClick={toggleTheme}
+            aria-label={isDarkMode ? 'Light Mode aktivieren' : 'Dark Mode aktivieren'}
+            title={isDarkMode ? 'Light Mode' : 'Dark Mode'}
+          >
+            {isDarkMode ? '☀️' : '🌙'}
+          </button>
         </div>
       </div>
     </header>

@@ -25,12 +25,13 @@
           color: var(--text-color);
 
           a {
-            color: #000;
+            color: var(--text-color);
             text-decoration: none;
             font-weight: 500;
 
             &:hover {
               text-decoration: underline;
+              color: var(--primary-color);
             }
           }
         }

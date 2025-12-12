@@ -24,7 +24,7 @@
       .filter-btn {
         padding: 8px 16px;
         border: 2px solid var(--border-color);
-        background: white;
+        background: var(--bg-white);
         color: var(--text-color);
         border-radius: 20px;
         cursor: pointer;
@@ -53,6 +53,8 @@
         border: 1px solid var(--border-color);
         border-radius: 8px;
         font-size: 14px;
+        background: var(--bg-white);
+        color: var(--text-color);
 
         &:focus {
           outline: none;

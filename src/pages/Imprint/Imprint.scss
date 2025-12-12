@@ -6,9 +6,9 @@
   .imprint-wrapper {
     width: 100%;
     padding: 32px 40px;
-    background: white;
+    background: var(--bg-white);
     border-radius: 12px;
-    box-shadow: 0 2px 8px rgba(180, 130, 200, 0.08);
+    box-shadow: 0 2px 8px var(--shadow-color);
 
     h1 {
       color: var(--text-color);
