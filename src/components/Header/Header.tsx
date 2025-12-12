@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { useState } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import './Header.scss';
 
 const img = (file: string) => `${import.meta.env.BASE_URL}images/${file}`;
@@ -12,6 +12,29 @@ export const Header = ({ cart }: HeaderProps) => {
   const totalItems = cart.reduce((sum, item) => sum + item.qty, 0);
   const totalPrice = cart.reduce((sum, item) => sum + item.price * item.qty, 0);
   const [showPreview, setShowPreview] = useState(false);
+  const timeoutRef = useRef<number | null>(null);
+
+  const handleMouseEnter = () => {
+    if (timeoutRef.current) {
+      clearTimeout(timeoutRef.current);
+      timeoutRef.current = null;
+    }
+    setShowPreview(true);
+  };
+
+  const handleMouseLeave = () => {
+    timeoutRef.current = window.setTimeout(() => {
+      setShowPreview(false);
+    }, 300);
+  };
+
+  useEffect(() => {
+    return () => {
+      if (timeoutRef.current) {
+        clearTimeout(timeoutRef.current);
+      }
+    };
+  }, []);
 
   return (
     <header className="header">
@@ -41,15 +64,19 @@ export const Header = ({ cart }: HeaderProps) => {
         <div className="nav-right">
           <div
             className="cart-wrapper"
-            onMouseEnter={() => setShowPreview(true)}
-            onMouseLeave={() => setShowPreview(false)}
+            onMouseEnter={handleMouseEnter}
+            onMouseLeave={handleMouseLeave}
           >
             <Link to="/cart" className="cart">
               🛒
               {totalItems > 0 && <span className="cart-badge">{totalItems}</span>}
             </Link>
             {showPreview && totalItems > 0 && (
-              <div className="cart-preview">
+              <div 
+                className="cart-preview"
+                onMouseEnter={handleMouseEnter}
+                onMouseLeave={handleMouseLeave}
+              >
                 <div className="cart-preview-header">
                   Warenkorb ({totalItems} {totalItems === 1 ? 'Artikel' : 'Artikel'})
                 </div>
