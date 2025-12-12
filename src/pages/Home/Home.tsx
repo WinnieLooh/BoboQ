@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { products } from '../../data/products';
 import './Home.scss';
 
-const hero = '/images/hero.jpg';
+const hero = '/images/logo_becher.png';
 
 export const HomePage = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
