@@ -2,6 +2,7 @@ import { useState, useMemo, useEffect } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import { ProductCard } from '../../components/ProductCard/ProductCard';
 import { products } from '../../data/products';
+import { useLanguage } from '../../contexts/LanguageContext';
 import type { FilterCategory } from '../../types';
 import './Shop.scss';
 
@@ -10,6 +11,7 @@ interface ShopPageProps {
 }
 
 export const ShopPage = ({ onAddToCart }: ShopPageProps) => {
+  const { t } = useLanguage();
   const [searchParams] = useSearchParams();
   const [currentCategory, setCurrentCategory] = useState<FilterCategory>('all');
   const [searchTerm, setSearchTerm] = useState('');
@@ -22,12 +24,12 @@ export const ShopPage = ({ onAddToCart }: ShopPageProps) => {
   }, [searchParams]);
 
   const categories: { id: FilterCategory; label: string }[] = [
-    { id: 'all', label: 'Alle' },
-    { id: 'boba', label: 'Boba' },
-    { id: 'tapioka', label: 'Tapioka' },
-    { id: 'tee', label: 'Tee' },
-    { id: 'sirup', label: 'Sirup' },
-    { id: 'zubehor', label: 'Zubehör' },
+    { id: 'all', label: t('allCategory') },
+    { id: 'boba', label: t('boba') },
+    { id: 'tapioka', label: t('tapioka') },
+    { id: 'tee', label: t('tee') },
+    { id: 'sirup', label: t('sirup') },
+    { id: 'zubehor', label: t('zubehor') },
   ];
 
   const parsePrice = (text: string): number => {

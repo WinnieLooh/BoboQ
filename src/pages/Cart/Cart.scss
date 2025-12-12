@@ -14,14 +14,16 @@
     }
 
     .cart-total {
-      background: var(--primary-light);
+      background: var(--bg-white);
+      border: 1px solid var(--border-color);
       border-radius: 12px;
       padding: 20px;
       text-align: right;
       margin-top: 24px;
+      box-shadow: 0 2px 8px var(--shadow-color);
 
       h3 {
-        color: var(--primary-dark);
+        color: var(--text-color);
         font-size: 20px;
         margin-bottom: 16px;
       }
@@ -65,6 +67,115 @@
           &:hover {
             background: var(--primary-light);
             box-shadow: 0 4px 12px var(--shadow-hover);
+          }
+        }
+      }
+    }
+  }
+}
+@media (max-width: 1024px) {
+  .cart-page {
+    padding: 16px;
+
+    .cart-inner {
+      padding: 16px;
+    }
+
+    .cart-container {
+      padding: 0 24px;
+
+      .cart-total {
+        padding: 16px;
+
+        h3 {
+          font-size: 18px;
+          margin-bottom: 12px;
+        }
+
+        .cart-actions button {
+          padding: 10px 20px;
+          font-size: 14px;
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  .cart-page {
+    padding: 12px;
+
+    .cart-inner {
+      padding: 12px;
+    }
+
+    .cart-container {
+      padding: 0 16px;
+
+      h2 {
+        font-size: 20px;
+        margin-bottom: 16px;
+      }
+
+      .cart-total {
+        padding: 12px;
+        border-radius: 10px;
+        margin-top: 16px;
+        text-align: left;
+
+        h3 {
+          font-size: 16px;
+          margin-bottom: 12px;
+        }
+
+        .cart-actions {
+          justify-content: stretch;
+          gap: 8px;
+
+          button {
+            flex: 1;
+            padding: 10px 12px;
+            font-size: 13px;
+          }
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: 480px) {
+  .cart-page {
+    padding: 8px;
+
+    .cart-inner {
+      padding: 8px;
+    }
+
+    .cart-container {
+      padding: 0 12px;
+
+      h2 {
+        font-size: 18px;
+        margin-bottom: 12px;
+      }
+
+      .cart-total {
+        padding: 10px;
+        border-radius: 8px;
+        margin-top: 12px;
+
+        h3 {
+          font-size: 14px;
+          margin-bottom: 10px;
+        }
+
+        .cart-actions {
+          gap: 6px;
+
+          button {
+            padding: 8px 10px;
+            font-size: 12px;
+            border-radius: 6px;
           }
         }
       }

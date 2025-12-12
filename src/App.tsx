@@ -17,7 +17,7 @@ function App() {
   return (
     <BrowserRouter basename="/BoboQ">
       <div className="app">
-        <Header cart={cart} />
+        <Header cart={cart} onRemoveFromCart={removeFromCart} onChangeQty={changeQty} />
         <main className="main-content">
           <Routes>
             <Route path="/" element={<HomePage onAddToCart={addToCart} />} />

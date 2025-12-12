@@ -1,4 +1,5 @@
 import { CartItemComponent } from '../../components/CartItem/CartItem';
+import { useLanguage } from '../../contexts/LanguageContext';
 import type { CartItem } from '../../types';
 import './Cart.scss';
 
@@ -9,15 +10,16 @@ interface CartPageProps {
 }
 
 export const CartPage = ({ cart, onRemove, onChangeQty }: CartPageProps) => {
+  const { t } = useLanguage();
   const total = cart.reduce((sum, item) => sum + item.price * item.qty, 0);
 
   return (
     <div className="cart-page">
       <div className="cart-inner">
-        <h2>Deine Bestellung</h2>
+        <h2>{t('yourOrder')}</h2>
         <div id="cart" className="cart-container">
           {cart.length === 0 ? (
-            <p>Der Warenkorb ist leer.</p>
+            <p>{t('emptyCartMessage')}</p>
           ) : (
             <>
               {cart.map((item, index) => (
@@ -30,13 +32,13 @@ export const CartPage = ({ cart, onRemove, onChangeQty }: CartPageProps) => {
                 />
               ))}
               <div className="cart-total">
-                <h3 id="total">Gesamtbetrag: {total.toFixed(2)} €</h3>
+                <h3 id="total">{t('totalAmount')}: {total.toFixed(2)} €</h3>
                 <div className="cart-actions">
-                  <button className="checkout-btn" onClick={() => alert('Checkout functionality coming soon!')}>
-                    Zur Kasse
+                  <button className="checkout-btn" onClick={() => alert(t('checkoutSoon'))}>
+                    {t('checkoutBtn')}
                   </button>
-                  <button className="quote-btn" onClick={() => alert('Quotation request sent!')}>
-                    Angebot anfordern
+                  <button className="quote-btn" onClick={() => alert(t('quoteSent'))}>
+                    {t('requestQuote')}
                   </button>
                 </div>
               </div>
