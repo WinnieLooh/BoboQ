@@ -1,22 +1,29 @@
 import { useEffect, useState, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import { products } from '../../data/products';
+import { useLanguage } from '../../contexts/LanguageContext';
 import './Home.scss';
 
 const hero = `${import.meta.env.BASE_URL}images/hero.jpg`;
 
-export const HomePage = () => {
+interface HomePageProps {
+  onAddToCart: (name: string, price: number, qty: number) => void;
+}
+
+export const HomePage = ({ onAddToCart }: HomePageProps) => {
+  const { t, tp } = useLanguage();
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isResetting, setIsResetting] = useState(false);
+  const [addingId, setAddingId] = useState<string | null>(null);
   const carouselRef = useRef<HTMLDivElement>(null);
   const displayProducts = products.slice(0, 8);
   const visibleCount = 4;
   const categories = [
-    { id: 'boba', label: 'Boba' },
-    { id: 'tapioka', label: 'Tapioka' },
-    { id: 'tee', label: 'Tee' },
-    { id: 'sirup', label: 'Sirup' },
-    { id: 'zubehor', label: 'Zubehör' },
+    { id: 'boba', label: t('boba') },
+    { id: 'tapioka', label: t('tapioka') },
+    { id: 'tee', label: t('tee') },
+    { id: 'sirup', label: t('sirup') },
+    { id: 'zubehor', label: t('zubehor') },
   ];
 
   const goNext = () => {
@@ -73,18 +80,26 @@ export const HomePage = () => {
     return () => cancelAnimationFrame(id);
   }, [isResetting]);
 
+  const handleAddToCart = (product: typeof products[0], e: React.MouseEvent) => {
+    e.preventDefault();
+    e.stopPropagation();
+    onAddToCart(product.name, product.price, 1);
+    setAddingId(product.id);
+    setTimeout(() => setAddingId(null), 600);
+  };
+
   return (
     <div className="home-page">
       <div className="hero">
         <div className="hero-content">
-          <h1>Willkommen bei BoboQ</h1>
-          <p>Entdecke unsere leckeren Bubble Tea Produkte</p>
+          <h1>{t('welcomeTitle')}</h1>
+          <p>{t('welcomeSubtitle')}</p>
         </div>
       </div>
 
       <div className="layout">
         <main className="main">
-          <h2 className="title-center">Produkte</h2>
+          <h2 className="title-center">{t('productsTitle')}</h2>
 
           <div className="category-grid">
             {categories.map((cat) => {
@@ -99,25 +114,34 @@ export const HomePage = () => {
             })}
           </div>
 
-          <h2 className="title-center">Beliebte Produkte</h2>
+          <h2 className="title-center">{t('featuredProducts')}</h2>
 
           <div className="carousel-container">
-            <button className="carousel-arrow left" onClick={goPrev} aria-label="Vorheriges Produkt">
+            <button className="carousel-arrow left" onClick={goPrev} aria-label={t('backToShop')}>
               ←
             </button>
             <div 
               ref={carouselRef}
               className={`carousel-track ${isResetting ? 'no-transition' : ''}`}
             >
-              {[...displayProducts, ...displayProducts].map((product, index) => (
+              {[...displayProducts, ...displayProducts].map((product, index) => {
+                const translatedName = tp(product.id, product.name);
+                return (
                 <div key={`${product.id}-${index}`} className="carousel-slide">
-                  <Link to={`/product/${product.id}`} className="slide-link" aria-label={`${product.name} Details ansehen`}>
-                    <img src={product.image} alt={product.name} />
-                    <h3>{product.name}</h3>
+                  <Link to={`/product/${product.id}`} className="slide-link" aria-label={`${translatedName} ${t('description')}`}>
+                    <img src={product.image} alt={translatedName} />
+                    <h3>{translatedName}</h3>
                     <p>{product.price.toFixed(2)} €</p>
                   </Link>
+                  <button
+                    className={`add-to-cart-btn ${addingId === product.id ? 'adding' : ''}`}
+                    onClick={(e) => handleAddToCart(product, e)}
+                    disabled={addingId === product.id}
+                  >
+                    {addingId === product.id ? `✓ ${t('added')}` : `🛒 ${t('addToCart')}`}
+                  </button>
                 </div>
-              ))}
+              );})}
             </div>
             <button className="carousel-arrow right" onClick={goNext} aria-label="Nächstes Produkt">
               →

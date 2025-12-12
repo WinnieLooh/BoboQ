@@ -2,6 +2,7 @@ import { useState } from 'react';
 import type { Product } from '../../types';
 import './ProductCard.scss';
 import { Link } from 'react-router-dom';
+import { useLanguage } from '../../contexts/LanguageContext';
 
 interface ProductCardProps {
   product: Product;
@@ -9,6 +10,7 @@ interface ProductCardProps {
 }
 
 export const ProductCard = ({ product, onAddToCart }: ProductCardProps) => {
+  const { t, tp } = useLanguage();
   const [quantity, setQuantity] = useState(1);
   const [isAdding, setIsAdding] = useState(false);
 
@@ -19,15 +21,17 @@ export const ProductCard = ({ product, onAddToCart }: ProductCardProps) => {
     setTimeout(() => setIsAdding(false), 600);
   };
 
+  const translatedName = tp(product.id, product.name);
+
   return (
     <div className="product" data-category={product.category}>
-      <Link to={`/product/${product.id}`} className="product-link" aria-label={`${product.name} Details ansehen`}>
-        <img src={product.image} alt={product.name} />
-        <h3>{product.name}</h3>
+      <Link to={`/product/${product.id}`} className="product-link" aria-label={`${translatedName} ${t('description')}`}>
+        <img src={product.image} alt={translatedName} />
+        <h3>{translatedName}</h3>
         <p>{product.price.toFixed(2)} €</p>
       </Link>
       <div className="qty-wrap">
-        <label htmlFor={`qty-${product.id}`}>Anzahl: </label>
+        <label htmlFor={`qty-${product.id}`}>{t('quantityLabel')}: </label>
         <input
           id={`qty-${product.id}`}
           type="number"
@@ -38,7 +42,7 @@ export const ProductCard = ({ product, onAddToCart }: ProductCardProps) => {
         />
       </div>
       <button onClick={handleAddToCart} className={`add-to-cart ${isAdding ? 'adding' : ''}`}>
-        {isAdding ? '✓ Hinzugefügt!' : 'In den Warenkorb'}
+        {isAdding ? `✓ ${t('added')}!` : t('addToCart')}
       </button>
     </div>
   );
