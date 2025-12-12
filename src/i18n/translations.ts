@@ -80,10 +80,6 @@ export const translations = {
     // Shop specific
     allCategory: 'Alle',
     
-    // Contact specific
-    address: 'Adresse',
-    germany: 'Deutschland',
-    
     // Product Card
     quantityLabel: 'Menge',
     
@@ -95,7 +91,6 @@ export const translations = {
     'litschi-boba': 'Litschi Boba',
     'passionsfrucht-boba': 'Passionsfrucht Boba',
     'mango-boba': 'Mango Boba',
-    'tapioka': 'Tapioka',
     'schwarztee': 'Schwarztee',
     'mango-sirup': 'Mango Sirup',
     'erdbeer-sirup': 'Erdbeer Sirup',
@@ -184,10 +179,6 @@ export const translations = {
     // Shop specific
     allCategory: 'All',
     
-    // Contact specific
-    address: 'Address',
-    germany: 'Germany',
-    
     // Product Card
     quantityLabel: 'Quantity',
     
@@ -199,7 +190,6 @@ export const translations = {
     'litschi-boba': 'Lychee Boba',
     'passionsfrucht-boba': 'Passion Fruit Boba',
     'mango-boba': 'Mango Boba',
-    'tapioka': 'Tapioca',
     'schwarztee': 'Black Tea',
     'mango-sirup': 'Mango Syrup',
     'erdbeer-sirup': 'Strawberry Syrup',
@@ -288,10 +278,6 @@ export const translations = {
     // Shop specific
     allCategory: 'Tất cả',
     
-    // Contact specific
-    address: 'Địa chỉ',
-    germany: 'Đức',
-    
     // Product Card
     quantityLabel: 'Số lượng',
     
@@ -303,7 +289,6 @@ export const translations = {
     'litschi-boba': 'Boba Vải',
     'passionsfrucht-boba': 'Boba Chanh dây',
     'mango-boba': 'Boba Xoài',
-    'tapioka': 'Tapioca',
     'schwarztee': 'Trà đen',
     'mango-sirup': 'Xi-rô Xoài',
     'erdbeer-sirup': 'Xi-rô Dâu',
@@ -392,10 +377,6 @@ export const translations = {
     // Shop specific
     allCategory: '全部',
     
-    // Contact specific
-    address: '地址',
-    germany: '德国',
-    
     // Product Card
     quantityLabel: '数量',
     
@@ -407,7 +388,6 @@ export const translations = {
     'litschi-boba': '荔枝波霸',
     'passionsfrucht-boba': '百香果波霸',
     'mango-boba': '芒果波霸',
-    'tapioka': '木薯珍珠',
     'schwarztee': '红茶',
     'mango-sirup': '芒果糖浆',
     'erdbeer-sirup': '草莓糖浆',
