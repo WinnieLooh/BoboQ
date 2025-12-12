@@ -1,5 +1,4 @@
 import type { CartItem } from '../../types';
-import { products } from '../../data/products';
 import './CartItem.scss';
 
 interface CartItemComponentProps {
@@ -16,8 +15,6 @@ export const CartItemComponent = ({
   onChangeQty,
 }: CartItemComponentProps) => {
   const itemTotal = item.price * item.qty;
-  const product = products.find((p) => p.name === item.name);
-  const imageUrl = product ? product.image : '';
 
   return (
     <div className="cart-item">
