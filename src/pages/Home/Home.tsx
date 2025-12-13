@@ -105,6 +105,11 @@ export const HomePage = ({ onAddToCart }: HomePageProps) => {
       <div className="layout">
         <div className="hero-spacer" aria-hidden="true"></div>
         <main className="main">
+          <div className="b2b-intro">
+            <h3>{t('b2bIntroTitle')}</h3>
+            <p>{t('b2bIntroText')}</p>
+          </div>
+
           <h2 className="title-center">{t('productsTitle')}</h2>
 
           <div className="category-grid">

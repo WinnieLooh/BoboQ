@@ -85,6 +85,8 @@ export const translations = {
     
     // Home specific
     productsTitle: 'Produkte',
+    b2bIntroTitle: 'Unser B2B-Angebot',
+    b2bIntroText: 'Bei BoboQ arbeiten wir ausschließlich B2B mit Großmengen. Wir bieten hochwertige Bubble Tea Produkte und Equipment für Restaurants, Cafés und Einzelhandelsketten. Kontaktieren Sie uns für individuelle Angebote und Mengenrabatte.',
     
     // Cart specific
     yourOrder: 'Deine Bestellung',
@@ -258,6 +260,8 @@ export const translations = {
     
     // Home specific
     productsTitle: 'Products',
+    b2bIntroTitle: 'Our B2B Offering',
+    b2bIntroText: 'BoboQ operates exclusively B2B with bulk quantities. We provide premium Bubble Tea products and equipment for restaurants, cafés, and retail chains. Contact us for custom quotes and volume discounts.',
     
     // Cart specific
     yourOrder: 'Your Order',
@@ -429,6 +433,8 @@ export const translations = {
     diy: 'Bộ DIY',    
     // Home specific
     productsTitle: 'Sản phẩm',
+    b2bIntroTitle: 'Dịch vụ B2B của chúng tôi',
+    b2bIntroText: 'BoboQ hoạt động độc quyền B2B với số lượng lớn. Chúng tôi cung cấp các sản phẩm Bubble Tea cao cấp và thiết bị cho các nhà hàng, quán cà phê và chuỗi bán lẻ. Liên hệ với chúng tôi để nhận báo giá tùy chỉnh và chiết khấu số lượng.',
     
     // Cart specific
     yourOrder: 'Đơn hàng của bạn',
@@ -599,6 +605,8 @@ export const translations = {
     diy: 'DIY套装',    
     // Home specific
     productsTitle: '产品',
+    b2bIntroTitle: '我们的B2B服务',
+    b2bIntroText: 'BoboQ 专门经营B2B大批量业务。我们为餐厅、咖啡厅和零售连锁店提供优质的珍珠奶茶产品和设备。联系我们获取定制报价和批量折扣。',
     
     // Cart specific
     yourOrder: '您的订单',
