@@ -151,19 +151,20 @@ export const Header = ({ cart, onRemoveFromCart, onChangeQty }: HeaderProps) => 
       <div className="container">
         <div className="brand">
           <Link to="/">
-            <img src={img('logo_cropped.png')} alt="BoboQ Logo" />
+            <img src={img('boboq_logo/_cropped.png')} alt="BoboQ Logo" />
           </Link>
         </div>
         <nav className="nav-center" aria-label="Hauptnavigation">
           <div className="nav-icons">
-            <a href="#" aria-label="Instagram">
-              <img src={img('instagram.png')} alt="Instagram" />
-            </a>
-            <a href="#" aria-label="TikTok">
-              <img src={img('tiktok.png')} alt="TikTok" />
-            </a>
-            <a href="#" className="whatsapp" aria-label="WhatsApp">
-              <img src={img('whatsapp.png')} alt="WhatsApp" />
+            <a
+              href="https://wa.me/4915234768935"
+              className="whatsapp"
+              aria-label="WhatsApp"
+              target="_blank"
+              rel="noopener noreferrer"
+              title="+49 1523 476 89 35"
+            >
+              <img src={img('socials_logo/whatsapp.png')} alt="WhatsApp: +49 1523 476 89 35" />
             </a>
           </div>
           <Link to="/">{t('home')}</Link>

@@ -18,7 +18,7 @@ export const ShopPage = ({ onAddToCart }: ShopPageProps) => {
 
   useEffect(() => {
     const categoryParam = searchParams.get('category') as FilterCategory | null;
-    if (categoryParam && ['boba', 'tapioka', 'tee', 'sirup', 'zubehor'].includes(categoryParam)) {
+    if (categoryParam && ['boba', 'tapioka', 'tee', 'sirup', 'zubehor', 'pulver', 'jelly', 'jellyjuice', 'crystal', 'diy'].includes(categoryParam)) {
       setCurrentCategory(categoryParam);
     }
   }, [searchParams]);
@@ -26,9 +26,14 @@ export const ShopPage = ({ onAddToCart }: ShopPageProps) => {
   const categories: { id: FilterCategory; label: string }[] = [
     { id: 'all', label: t('allCategory') },
     { id: 'boba', label: t('boba') },
+    { id: 'sirup', label: t('sirup') },
     { id: 'tapioka', label: t('tapioka') },
     { id: 'tee', label: t('tee') },
-    { id: 'sirup', label: t('sirup') },
+    { id: 'pulver', label: t('pulver') },
+    { id: 'jelly', label: t('jelly') },
+    { id: 'jellyjuice', label: t('jellyjuice') },
+    { id: 'crystal', label: t('crystal') },
+    { id: 'diy', label: t('diy') },
     { id: 'zubehor', label: t('zubehor') },
   ];
 

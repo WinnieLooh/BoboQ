@@ -11,7 +11,7 @@ export interface Product {
   price: number;
   image: string;
   category: string;
-  description?: string;
+  description: string;
 }
 
-export type FilterCategory = 'all' | 'boba' | 'tapioka' | 'tee' | 'sirup' | 'zubehor';
+export type FilterCategory = 'all' | 'boba' | 'tapioka' | 'tee' | 'sirup' | 'zubehor' | 'pulver' | 'jelly' | 'jellyjuice' | 'crystal' | 'diy';

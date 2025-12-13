@@ -3,8 +3,11 @@ header.header {
   border-bottom: 1px solid var(--primary-dark);
   padding: 16px 0;
   box-shadow: 0 2px 4px rgba(178, 192, 255, 0.2);
-  position: sticky !important;
+  position: fixed !important;
   top: 0 !important;
+  left: 0;
+  right: 0;
+  width: 100%;
   z-index: 1000 !important;
 
   .container {
@@ -20,7 +23,7 @@ header.header {
     }
 
     img {
-      height: 40px;
+      height: 65px;
       width: auto;
       object-fit: contain;
     }
@@ -32,6 +35,7 @@ header.header {
     flex: 1;
     justify-content: center;
     align-items: center;
+    margin-left: 400px;
 
     .nav-icons {
       margin-right: 8px;
@@ -440,6 +444,22 @@ header.header {
         transform: translateY(0);
       }
     }
+  }
+
+  /* Ensure WhatsApp icon + number sit inline and readable */
+  .nav-center .nav-icons a.whatsapp,
+  .nav-right .cart,
+  .nav-right a.whatsapp {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    white-space: nowrap;
+  }
+
+  .nav-center .nav-icons a.whatsapp span,
+  .nav-right a.whatsapp span {
+    color: #fff;
+    font-weight: 600;
   }
 
   .nav-search {

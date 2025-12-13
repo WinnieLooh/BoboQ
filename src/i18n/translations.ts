@@ -26,7 +26,7 @@ export const translations = {
     welcomeSubtitle: 'Entdecke unsere köstlichen Bubble Tea Kreationen',
     shopNow: 'Jetzt Einkaufen',
     ourCategories: 'Unsere Kategorien',
-    featuredProducts: 'Beliebte Produkte',
+    featuredProducts: 'Bestseller Produkte',
     addToCart: 'In den Warenkorb',
     added: 'Hinzugefügt',
     
@@ -40,6 +40,14 @@ export const translations = {
     price: 'Preis',
     description: 'Beschreibung',
     backToShop: 'Zurück zum Shop',
+    detailNotFoundTitle: 'Produkt nicht gefunden',
+    detailNotFoundBody: 'Das angeforderte Produkt ist nicht verfügbar. Schau dich im Shop nach weiteren Favoriten um.',
+    detailBadge: 'Mehr erfahren',
+    detailLead: 'Hier findest du ein paar zusätzliche Hinweise zu diesem Produkt. Wir achten auf hochwertige Zutaten, ausgewogene Süße und einen intensiven Geschmack, der perfekt zu Milch- und Fruchttees passt.',
+    detailHighlight1: 'Handverlesene Zutaten und frische Verarbeitung',
+    detailHighlight2: 'Ideal zum Kombinieren mit unseren Tees und Sirups',
+    detailHighlight3: 'Schnell zubereitet – perfekt für einen spontanen Bubble-Tea-Moment',
+    detailHighlight4: 'Mehr Ideen gefällig? Sieh dich im Shop um und stell dir deine Lieblingskombination zusammen.',
     
     // Cart Page
     yourCart: 'Ihr Warenkorb',
@@ -69,6 +77,11 @@ export const translations = {
     tee: 'Tee',
     sirup: 'Sirup',
     zubehor: 'Zubehör',
+    pulver: 'Pulver',
+    jelly: 'Jelly',
+    jellyjuice: 'Jelly Juice',
+    crystal: 'Crystal Ball',
+    diy: 'DIY Kits',
     
     // Home specific
     productsTitle: 'Produkte',
@@ -186,7 +199,7 @@ export const translations = {
     welcomeSubtitle: 'Discover our delicious Bubble Tea creations',
     shopNow: 'Shop Now',
     ourCategories: 'Our Categories',
-    featuredProducts: 'Featured Products',
+    featuredProducts: 'Best Selling Products',
     addToCart: 'Add to Cart',
     added: 'Added',
     
@@ -200,6 +213,14 @@ export const translations = {
     price: 'Price',
     description: 'Description',
     backToShop: 'Back to Shop',
+    detailNotFoundTitle: 'Product not found',
+    detailNotFoundBody: 'The requested product is not available. Browse the shop for more favorites.',
+    detailBadge: 'Learn more',
+    detailLead: 'Here are a few extra notes about this product. We focus on quality ingredients, balanced sweetness, and a bold flavor that pairs perfectly with milk and fruit teas.',
+    detailHighlight1: 'Handpicked ingredients and fresh processing',
+    detailHighlight2: 'Ideal to combine with our teas and syrups',
+    detailHighlight3: 'Quick to prepare – perfect for a spontaneous bubble tea moment',
+    detailHighlight4: 'Want more ideas? Browse the shop and create your favorite combo.',
     
     // Cart Page
     yourCart: 'Your Cart',
@@ -229,6 +250,11 @@ export const translations = {
     tee: 'Tea',
     sirup: 'Syrup',
     zubehor: 'Accessories',
+    pulver: 'Powder',
+    jelly: 'Jelly',
+    jellyjuice: 'Jelly Juice',
+    crystal: 'Crystal Ball',
+    diy: 'DIY Kits',
     
     // Home specific
     productsTitle: 'Products',
@@ -346,7 +372,7 @@ export const translations = {
     welcomeSubtitle: 'Khám phá những ly trà sữa ngon tuyệt vời',
     shopNow: 'Mua ngay',
     ourCategories: 'Danh mục',
-    featuredProducts: 'Sản phẩm nổi bật',
+    featuredProducts: 'Sản phẩm bán chạy nhất',
     addToCart: 'Thêm vào giỏ',
     added: 'Đã thêm',
     
@@ -360,6 +386,14 @@ export const translations = {
     price: 'Giá',
     description: 'Mô tả',
     backToShop: 'Quay lại cửa hàng',
+    detailNotFoundTitle: 'Không tìm thấy sản phẩm',
+    detailNotFoundBody: 'Sản phẩm bạn tìm không có. Hãy xem thêm các lựa chọn khác trong cửa hàng.',
+    detailBadge: 'Xem thêm',
+    detailLead: 'Dưới đây là vài lưu ý thêm về sản phẩm. Chúng tôi chú trọng nguyên liệu chất lượng, độ ngọt cân bằng và hương vị đậm đà, phù hợp hoàn hảo với trà sữa và trà trái cây.',
+    detailHighlight1: 'Nguyên liệu chọn lọc, chế biến tươi',
+    detailHighlight2: 'Lý tưởng để kết hợp với trà và siro của chúng tôi',
+    detailHighlight3: 'Pha nhanh – hoàn hảo cho khoảnh khắc bubble tea bất chợt',
+    detailHighlight4: 'Muốn thêm ý tưởng? Khám phá cửa hàng và tự tạo combo yêu thích.',
     
     // Cart Page
     yourCart: 'Giỏ hàng của bạn',
@@ -388,8 +422,11 @@ export const translations = {
     tapioka: 'Tapioca',
     tee: 'Trà',
     sirup: 'Xi-rô',
-    zubehor: 'Phụ kiện',
-    
+    zubehor: 'Phụ kiện',    pulver: 'Bột',
+    jelly: 'Thạch',
+    jellyjuice: 'Thạch nước',
+    crystal: 'Bi pha lê',
+    diy: 'Bộ DIY',    
     // Home specific
     productsTitle: 'Sản phẩm',
     
@@ -505,7 +542,7 @@ export const translations = {
     welcomeSubtitle: '探索我们美味的珍珠奶茶',
     shopNow: '立即购买',
     ourCategories: '我们的分类',
-    featuredProducts: '特色产品',
+    featuredProducts: '畅销产品',
     addToCart: '加入购物车',
     added: '已添加',
     
@@ -519,6 +556,14 @@ export const translations = {
     price: '价格',
     description: '描述',
     backToShop: '返回商店',
+    detailNotFoundTitle: '未找到产品',
+    detailNotFoundBody: '您要找的产品暂不可用。欢迎浏览商店中的其他商品。',
+    detailBadge: '了解更多',
+    detailLead: '以下是该产品的补充说明。我们注重优质原料、平衡的甜度，以及与奶茶和果茶完美搭配的浓郁风味。',
+    detailHighlight1: '精选原料，新鲜制作',
+    detailHighlight2: '适合与我们的茶叶和糖浆搭配',
+    detailHighlight3: '快速冲调——即刻享用一杯泡泡茶',
+    detailHighlight4: '想要更多创意？逛逛商店，搭配你的专属组合。',
     
     // Cart Page
     yourCart: '您的购物车',
@@ -547,8 +592,11 @@ export const translations = {
     tapioka: '木薯',
     tee: '茶',
     sirup: '糖浆',
-    zubehor: '配件',
-    
+    zubehor: '配件',    pulver: '粉末',
+    jelly: '果冻',
+    jellyjuice: '爆汁果冻',
+    crystal: '水晶球',
+    diy: 'DIY套装',    
     // Home specific
     productsTitle: '产品',
     

@@ -20,9 +20,14 @@ export const HomePage = ({ onAddToCart }: HomePageProps) => {
   const visibleCount = 4;
   const categories = [
     { id: 'boba', label: t('boba') },
+    { id: 'sirup', label: t('sirup') },
     { id: 'tapioka', label: t('tapioka') },
     { id: 'tee', label: t('tee') },
-    { id: 'sirup', label: t('sirup') },
+    { id: 'pulver', label: t('pulver') },
+    { id: 'jelly', label: t('jelly') },
+    { id: 'jellyjuice', label: t('jellyjuice') },
+    { id: 'crystal', label: t('crystal') },
+    { id: 'diy', label: t('diy') },
     { id: 'zubehor', label: t('zubehor') },
   ];
 
@@ -116,7 +121,7 @@ export const HomePage = ({ onAddToCart }: HomePageProps) => {
           </div>
 
           <div className="featured-spacer" aria-hidden="true"></div>
-          <h2 className="title-center">{t('featuredProducts')}</h2>
+          <h2 className="title-center featured-title">{t('featuredProducts')}</h2>
 
           <div className="carousel-container">
             <button className="carousel-arrow left" onClick={goPrev} aria-label={t('backToShop')}>
@@ -128,22 +133,36 @@ export const HomePage = ({ onAddToCart }: HomePageProps) => {
             >
               {[...displayProducts, ...displayProducts].map((product, index) => {
                 const translatedName = tp(product.id, product.name);
+                const isBoboQProduct = product.image.toLowerCase().includes('boboq') || 
+                                       product.name.toLowerCase().includes('boboq');
+
+                console.log('Home Carousel Debug', {
+                  idx: index,
+                  id: product.id,
+                  name: product.name,
+                  translatedName,
+                  image: product.image,
+                  isBoboQ: isBoboQProduct,
+                });
+
                 return (
-                <div key={`${product.id}-${index}`} className="carousel-slide">
-                  <Link to={`/product/${product.id}`} className="slide-link" aria-label={`${translatedName} ${t('description')}`}>
-                    <img src={product.image} alt={translatedName} />
-                    <h3>{translatedName}</h3>
-                    <p>{product.price.toFixed(2)} €</p>
-                  </Link>
-                  <button
-                    className={`add-to-cart-btn ${addingId === product.id ? 'adding' : ''}`}
-                    onClick={(e) => handleAddToCart(product, e)}
-                    disabled={addingId === product.id}
-                  >
-                    {addingId === product.id ? `✓ ${t('added')}` : `🛒 ${t('addToCart')}`}
-                  </button>
-                </div>
-              );})}
+                  <div key={`${product.id}-${index}`} className="carousel-slide">
+                    <Link to={`/product/${product.id}`} className="slide-link" aria-label={`${translatedName} ${t('description')}`}>
+                      <img src={product.image} alt={translatedName} />
+                      {isBoboQProduct && <div className="product-brand">BOBOQ</div>}
+                      <h3 style={{ color: '#e4e4e4', fontSize: '15px', fontWeight: 600, lineHeight: '1.4', marginBottom: '6px' }}>{translatedName}</h3>
+                      <p style={{ color: '#8DA5FF', fontSize: '14px', fontWeight: 600 }}>{product.price.toFixed(2)} €</p>
+                    </Link>
+                    <button
+                      className={`add-to-cart-btn ${addingId === product.id ? 'adding' : ''}`}
+                      onClick={(e) => handleAddToCart(product, e)}
+                      disabled={addingId === product.id}
+                    >
+                      {addingId === product.id ? `✓ ${t('added')}` : `🛒 ${t('addToCart')}`}
+                    </button>
+                  </div>
+                );
+              })}
             </div>
             <button className="carousel-arrow right" onClick={goNext} aria-label="Nächstes Produkt">
               →

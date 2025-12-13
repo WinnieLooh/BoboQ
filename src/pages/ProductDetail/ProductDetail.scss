@@ -54,6 +54,15 @@
   flex-direction: column;
   gap: 12px;
 
+  .product-brand {
+    font-size: 14px;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    color: var(--primary-color);
+    text-transform: uppercase;
+    margin-bottom: 8px;
+  }
+
   h1 {
     margin: 0;
   }
@@ -63,6 +72,17 @@
     font-weight: 700;
     color: var(--primary-color);
     margin: 0;
+  }
+
+  .product-description {
+    margin: 12px 0;
+    color: var(--text-muted);
+    line-height: 1.6;
+    font-size: 15px;
+    padding: 12px;
+    background: var(--bg-color);
+    border-radius: 8px;
+    border-left: 3px solid var(--primary-color);
   }
 
   .lead {

@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import { products } from '../../data/products';
+import { useLanguage } from '../../contexts/LanguageContext';
 import './ProductDetail.scss';
 
 interface ProductDetailPageProps {
@@ -11,15 +12,16 @@ export function ProductDetailPage({ onAddToCart }: ProductDetailPageProps) {
   const { id } = useParams();
   const product = products.find((p) => p.id === id);
   const [quantity, setQuantity] = useState(1);
+  const { t, tp } = useLanguage();
 
   if (!product) {
     return (
       <div className="product-detail-page">
         <div className="product-detail-card card">
           <div className="info">
-            <h1>Produkt nicht gefunden</h1>
-            <p>Das angeforderte Produkt ist nicht verfügbar. Schau dich im Shop nach weiteren Favoriten um.</p>
-            <Link to="/shop" className="back-link">Zurück zum Shop</Link>
+            <h1>{t('detailNotFoundTitle')}</h1>
+            <p>{t('detailNotFoundBody')}</p>
+            <Link to="/shop" className="back-link">{t('backToShop')}</Link>
           </div>
         </div>
       </div>
@@ -27,19 +29,26 @@ export function ProductDetailPage({ onAddToCart }: ProductDetailPageProps) {
   }
 
   const handleAddToCart = () => onAddToCart(product.id, product.name, product.price, quantity);
+  const translatedName = tp(product.id, product.name);
+  const isBoboQProduct = product.image.toLowerCase().includes('boboq') || 
+                         product.name.toLowerCase().includes('boboq');
 
   return (
     <div className="product-detail-page">
       <div className="product-detail-card card">
         <div className="gallery">
-          <img src={product.image} alt={product.name} />
-          <span className="badge">Mehr erfahren</span>
+          <img src={product.image} alt={translatedName} />
+          <span className="badge">{t('detailBadge')}</span>
         </div>
         <div className="info">
-          <h1>{product.name}</h1>
+            {isBoboQProduct && <div className="product-brand">BOBOQ</div>}
+          <h1>{translatedName}</h1>
           <p className="price">{product.price.toFixed(2)} €</p>
+          {product.description && (
+            <p className="product-description">{product.description}</p>
+          )}
           <div className="qty-wrap">
-            <label htmlFor="detail-qty">Anzahl:</label>
+            <label htmlFor="detail-qty">{t('quantityLabel')}:</label>
             <input
               id="detail-qty"
               type="number"
@@ -49,20 +58,19 @@ export function ProductDetailPage({ onAddToCart }: ProductDetailPageProps) {
             />
           </div>
           <div className="actions">
-            <button onClick={handleAddToCart}>In den Warenkorb</button>
-            <Link to="/shop" className="back-link">Zurück zum Shop</Link>
+            <button onClick={handleAddToCart}>{t('addToCart')}</button>
+            <Link to="/shop" className="back-link">{t('backToShop')}</Link>
           </div>
         </div>
         <div className="bottom-section">
           <p className="lead description-full">
-            Hier findest du ein paar zusätzliche Hinweise zu diesem Produkt. Wir achten auf hochwertige Zutaten,
-            ausgewogene Süße und einen intensiven Geschmack, der perfekt zu Milch- und Fruchttees passt.
+            {t('detailLead')}
           </p>
           <ul className="highlights">
-            <li>Handverlesene Zutaten und frische Verarbeitung</li>
-            <li>Ideal zum Kombinieren mit unseren Tees und Sirups</li>
-            <li>Schnell zubereitet – perfekt für einen spontanen Bubble-Tea-Moment</li>
-            <li>Mehr Ideen gefällig? Sieh dich im Shop um und stell dir deine Lieblingskombination zusammen.</li>
+            <li>{t('detailHighlight1')}</li>
+            <li>{t('detailHighlight2')}</li>
+            <li>{t('detailHighlight3')}</li>
+            <li>{t('detailHighlight4')}</li>
           </ul>
         </div>
       </div>

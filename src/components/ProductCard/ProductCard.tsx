@@ -22,13 +22,41 @@ export const ProductCard = ({ product, onAddToCart }: ProductCardProps) => {
   };
 
   const translatedName = tp(product.id, product.name);
+    const isBoboQProduct = product.image.toLowerCase().includes('boboq') || 
+                           product.name.toLowerCase().includes('boboq');
+
+  console.log('ProductCard Debug:', {
+    productId: product.id,
+    productName: product.name,
+    translatedName: translatedName,
+      category: product.category,
+      isBoboQ: isBoboQProduct
+  });
 
   return (
     <div className="product" data-category={product.category}>
       <Link to={`/product/${product.id}`} className="product-link" aria-label={`${translatedName} ${t('description')}`}>
         <img src={product.image} alt={translatedName} />
-        <h3>{translatedName}</h3>
-        <p>{product.price.toFixed(2)} €</p>
+          {isBoboQProduct && (
+            <div style={{ 
+              padding: '4px 16px 0', 
+              marginTop: '8px', 
+              marginBottom: '2px', 
+              fontSize: '12px', 
+              fontWeight: '700', 
+              letterSpacing: '1px', 
+              color: '#8DA5FF', 
+              textTransform: 'uppercase' 
+            }}>
+              BOBOQ
+            </div>
+          )}
+        <h3 style={{ color: '#333', fontSize: '16px', fontWeight: '600', padding: '0 16px', marginTop: '8px', marginBottom: '4px' }}>
+          {translatedName}
+        </h3>
+        <p style={{ color: '#8DA5FF', fontSize: '16px', fontWeight: '600', padding: '0 16px', marginBottom: '8px' }}>
+          {product.price.toFixed(2)} €
+        </p>
       </Link>
       <div className="qty-wrap">
         <label htmlFor={`qty-${product.id}`}>{t('quantityLabel')}: </label>
