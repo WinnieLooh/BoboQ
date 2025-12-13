@@ -6,7 +6,7 @@ export const products: Product[] = [
   // Popping Boba
   {
     id: 'popball-ananas',
-    name: 'Ananas Popping Boba',
+    name: 'Ananas - Pop Ball',
     price: 4.9,
     image: img('boboq_popball/ananas.png'),
     category: 'boba',
@@ -14,7 +14,7 @@ export const products: Product[] = [
   },
   {
     id: 'popball-apfel',
-    name: 'Apfel Popping Boba',
+    name: 'Apfel - Pop Ball',
     price: 4.9,
     image: img('boboq_popball/apfel.png'),
     category: 'boba',
@@ -22,7 +22,7 @@ export const products: Product[] = [
   },
   {
     id: 'popball-banane',
-    name: 'Banane Popping Boba',
+    name: 'Banane - Pop Ball',
     price: 4.9,
     image: img('boboq_popball/banane.png'),
     category: 'boba',
@@ -30,7 +30,7 @@ export const products: Product[] = [
   },
   {
     id: 'popball-brauner-zucker',
-    name: 'Brauner Zucker Popping Boba',
+    name: 'Brauner Zucker - Pop Ball',
     price: 4.9,
     image: img('boboq_popball/brauner_zucker.png'),
     category: 'boba',
@@ -38,7 +38,7 @@ export const products: Product[] = [
   },
   {
     id: 'popball-drachenfrucht',
-    name: 'Drachenfrucht Popping Boba',
+    name: 'Drachenfrucht - Pop Ball',
     price: 4.9,
     image: img('boboq_popball/drachenfrucht.png'),
     category: 'boba',
@@ -46,7 +46,7 @@ export const products: Product[] = [
   },
   {
     id: 'popball-erdbeer',
-    name: 'Erdbeer Popping Boba',
+    name: 'Erdbeer - Pop Ball',
     price: 4.9,
     image: img('boboq_popball/erdbeer.png'),
     category: 'boba',
@@ -54,7 +54,7 @@ export const products: Product[] = [
   },
   {
     id: 'popball-granatapfel',
-    name: 'Granatapfel Popping Boba',
+    name: 'Granatapfel - Pop Ball',
     price: 4.9,
     image: img('boboq_popball/granatapfel.png'),
     category: 'boba',
@@ -62,7 +62,7 @@ export const products: Product[] = [
   },
   {
     id: 'popball-heidelbeer',
-    name: 'Heidelbeer Popping Boba',
+    name: 'Heidelbeer - Pop Ball',
     price: 4.9,
     image: img('boboq_popball/heidelbeer.png'),
     category: 'boba',
@@ -70,7 +70,7 @@ export const products: Product[] = [
   },
   {
     id: 'popball-himbeer',
-    name: 'Himbeer Popping Boba',
+    name: 'Himbeer - Pop Ball',
     price: 4.9,
     image: img('boboq_popball/himbeer.png'),
     category: 'boba',
@@ -78,7 +78,7 @@ export const products: Product[] = [
   },
   {
     id: 'popball-honeydew',
-    name: 'Honeydew Popping Boba',
+    name: 'Honeydew - Pop Ball',
     price: 4.9,
     image: img('boboq_popball/honeydew.png'),
     category: 'boba',
@@ -86,7 +86,7 @@ export const products: Product[] = [
   },
   {
     id: 'popball-kirsch',
-    name: 'Kirsch Popping Boba',
+    name: 'Kirsch - Pop Ball',
     price: 4.9,
     image: img('boboq_popball/kirsch.png'),
     category: 'boba',
@@ -94,7 +94,7 @@ export const products: Product[] = [
   },
   {
     id: 'popball-kiwi',
-    name: 'Kiwi Popping Boba',
+    name: 'Kiwi - Pop Ball',
     price: 4.9,
     image: img('boboq_popball/kiwi.png'),
     category: 'boba',
@@ -102,7 +102,7 @@ export const products: Product[] = [
   },
   {
     id: 'popball-kokosnuss',
-    name: 'Kokosnuss Popping Boba',
+    name: 'Kokosnuss - Pop Ball',
     price: 4.9,
     image: img('boboq_popball/kokosnuss.png'),
     category: 'boba',
@@ -110,7 +110,7 @@ export const products: Product[] = [
   },
   {
     id: 'popball-lavendel',
-    name: 'Lavendel Popping Boba',
+    name: 'Lavendel - Pop Ball',
     price: 4.9,
     image: img('boboq_popball/lavendel.png'),
     category: 'boba',
@@ -118,67 +118,67 @@ export const products: Product[] = [
   },
   {
     id: 'popball-litschi',
-    name: 'Litschi Popping Boba',
+    name: 'Litschi - Pop Ball',
     price: 4.9,
     image: img('boboq_popball/litschi.png'),
     category: 'boba',
-    description: 'Exotische Litschi Popping Boba mit süßem, blumigem Geschmack. Ein asiatischer Klassiker.',
+    description: 'Exotische Litschi - Pop Ball mit süßem, blumigem Geschmack. Ein asiatischer Klassiker.',
   },
   {
     id: 'popball-mango',
-    name: 'Mango Popping Boba',
+    name: 'Mango - Pop Ball',
     price: 4.9,
     image: img('boboq_popball/mango.png'),
     category: 'boba',
-    description: 'Tropische Mango Popping Boba mit intensivem Fruchtgeschmack. Einer der beliebtesten Geschmacksrichtungen.',
+    description: 'Tropische Mango - Pop Ball mit intensivem Fruchtgeschmack. Einer der beliebtesten Geschmacksrichtungen.',
   },
   {
     id: 'popball-maracuja',
-    name: 'Maracuja Popping Boba',
+    name: 'Maracuja - Pop Ball',
     price: 4.9,
     image: img('boboq_popball/maracuja.png'),
     category: 'boba',
-    description: 'Säuerlich-frische Maracuja Popping Boba mit tropischem Kick. Perfekt für erfrischende Tees.',
+    description: 'Säuerlich-frische Maracuja - Pop Ball mit tropischem Kick. Perfekt für erfrischende Tees.',
   },
   {
     id: 'popball-pfirsisch',
-    name: 'Pfirsisch Popping Boba',
+    name: 'Pfirsisch - Pop Ball',
     price: 4.9,
     image: img('boboq_popball/pfirsisch.png'),
     category: 'boba',
-    description: 'Samtig-süße Pfirsisch Popping Boba mit mildem Steinobst-Aroma. Ideal für cremige Milchtees.',
+    description: 'Samtig-süße Pfirsisch - Pop Ball mit mildem Steinobst-Aroma. Ideal für cremige Milchtees.',
   },
   {
     id: 'popball-schokolade',
-    name: 'Schokolade Popping Boba',
+    name: 'Schokolade - Pop Ball',
     price: 4.9,
     image: img('boboq_popball/schokolade.png'),
     category: 'boba',
-    description: 'Reichhaltige Schokoladen Popping Boba für dekadente Bubble Tea Erlebnisse. Perfekt für Dessert-Drinks.',
+    description: 'Reichhaltige Schokoladen - Pop Ball für dekadente Bubble Tea Erlebnisse. Perfekt für Dessert-Drinks.',
   },
   {
     id: 'popball-traube',
-    name: 'Traube Popping Boba',
+    name: 'Traube - Pop Ball',
     price: 4.9,
     image: img('boboq_popball/traube.png'),
     category: 'boba',
-    description: 'Süße Trauben Popping Boba mit fruchtigem Geschmack. Beliebt bei Jung und Alt.',
+    description: 'Süße Trauben - Pop Ball mit fruchtigem Geschmack. Beliebt bei Jung und Alt.',
   },
   {
     id: 'popball-wassermelone',
-    name: 'Wassermelone Popping Boba',
+    name: 'Wassermelone - Pop Ball',
     price: 4.9,
     image: img('boboq_popball/wassermelone.png'),
     category: 'boba',
-    description: 'Erfrischende Wassermelonen Popping Boba mit süßem Sommergeschmack. Perfekt für heiße Tage.',
+    description: 'Erfrischende Wassermelonen - Pop Ball mit süßem Sommergeschmack. Perfekt für heiße Tage.',
   },
   {
     id: 'popball-zitrone',
-    name: 'Zitrone Popping Boba',
+    name: 'Zitrone - Pop Ball',
     price: 4.9,
     image: img('boboq_popball/zitrone.png'),
     category: 'boba',
-    description: 'Spritzige Zitronen Popping Boba mit frischem, saurem Kick. Ideal für erfrischende Eistees.',
+    description: 'Spritzige Zitronen - Pop Ball mit frischem, saurem Kick. Ideal für erfrischende Eistees.',
   },
 
   // Sirupe
@@ -224,11 +224,11 @@ export const products: Product[] = [
   },
   {
     id: 'sirup-fructose',
-    name: 'Fructose Sirup',
+    name: 'Fruktose Sirup',
     price: 5.9,
     image: img('boboq_syrup/fructose.png'),
     category: 'sirup',
-    description: 'Reiner Fructose Sirup als neutrale Süßungsalternative. Ideal für individuelle Süßungsgrade.',
+    description: 'Reiner Fruktose Sirup als neutrale Süßungsalternative. Ideal für individuelle Süßungsgrade.',
   },
   {
     id: 'sirup-grapefruit',
@@ -394,7 +394,7 @@ export const products: Product[] = [
   // Tapioka
   {
     id: 'tapioka-erdbeer',
-    name: 'Tapioka Erdbeer',
+    name: 'Erdbeer Tapioka',
     price: 7.9,
     image: img('Tapioka/erdbeer.png'),
     category: 'tapioka',
@@ -402,7 +402,7 @@ export const products: Product[] = [
   },
   {
     id: 'tapioka-mango',
-    name: 'Tapioka Mango',
+    name: 'Mango Tapioka',
     price: 7.9,
     image: img('Tapioka/mango.png'),
     category: 'tapioka',
@@ -410,7 +410,7 @@ export const products: Product[] = [
   },
   {
     id: 'tapioka-schnell',
-    name: 'Schnell-Tapioka',
+    name: 'Instant Tapioka',
     price: 8.9,
     image: img('Tapioka/tabioka_schnell.png'),
     category: 'tapioka',
@@ -426,19 +426,11 @@ export const products: Product[] = [
   },
   {
     id: 'tapioka-taro',
-    name: 'Tapioka Taro',
+    name: 'Taro Tapioka',
     price: 7.9,
     image: img('Tapioka/taro.png'),
     category: 'tapioka',
     description: 'Lila Taro Tapioka-Perlen mit süßem, nussigem Geschmack. Beliebt in Taiwan.',
-  },
-  {
-    id: 'tapioka-taro-premium',
-    name: 'Premium Tapioka Taro',
-    price: 8.9,
-    image: img('Tapioka/taro1.png'),
-    category: 'tapioka',
-    description: 'Premium Taro Tapioka-Perlen mit intensiverem Geschmack und perfekter Textur.',
   },
 
   // Tee

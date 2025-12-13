@@ -1,5 +1,5 @@
 import { Link, useNavigate } from 'react-router-dom';
-import { useState, useRef, useEffect } from 'react';
+import { useState, useRef, useEffect, useMemo } from 'react';
 import { products } from '../../data/products';
 import type { Product } from '../../types';
 import { useLanguage } from '../../contexts/LanguageContext';
@@ -21,6 +21,17 @@ export const Header = ({ cart, onRemoveFromCart, onChangeQty }: HeaderProps) => 
   const { user, logout } = useAuth();
   const totalItems = cart.length;
   const totalPrice = cart.reduce((sum, item) => sum + item.price * item.qty, 0);
+  // Unique categories for dropdown
+  const categories = useMemo(() => {
+    const cats: Record<string, { name: string; image: string }> = {};
+    products.forEach((p) => {
+      if (!cats[p.category]) {
+        cats[p.category] = { name: p.category, image: p.image };
+      }
+    });
+    return Object.entries(cats).map(([key, val]) => ({ key, ...val }));
+  }, []);
+  const [showCatDropdown, setShowCatDropdown] = useState(false);
   const [showPreview, setShowPreview] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
   const [showSearchResults, setShowSearchResults] = useState(false);
@@ -168,7 +179,39 @@ export const Header = ({ cart, onRemoveFromCart, onChangeQty }: HeaderProps) => 
             </a>
           </div>
           <Link to="/">{t('home')}</Link>
-          <Link to="/shop">{t('products')}</Link>
+          <div
+            className="nav-products-dropdown"
+            onMouseEnter={() => setShowCatDropdown(true)}
+            onMouseLeave={() => setShowCatDropdown(false)}
+            tabIndex={0}
+          >
+            <Link to="/shop" className="nav-products-link">{t('products')}</Link>
+            {showCatDropdown && (
+              <div className="cat-dropdown-menu">
+                {categories.map((cat) => {
+                  // Use translation key for category, fallback to capitalized key
+                  let label = t(cat.key);
+                  // For German, always show 'Zubehör' for 'zubehor'
+                  if (language === 'de' && cat.key === 'zubehor') label = 'ZUBEHÖR';
+                  // Fallback: capitalize
+                  if (!label || label === cat.key) label = cat.key.charAt(0).toUpperCase() + cat.key.slice(1);
+                  let displayLabel = label;
+                  if (cat.key === 'diy') displayLabel = 'DIY';
+                  else displayLabel = label.charAt(0).toUpperCase() + label.slice(1).toLowerCase();
+                  return (
+                    <Link
+                      to={`/shop?cat=${cat.key}`}
+                      className="cat-dropdown-item"
+                      key={cat.key}
+                    >
+                      <img src={cat.image} alt={displayLabel} className="cat-dropdown-img" />
+                      <span style={{ textTransform: cat.key === 'diy' ? 'uppercase' : 'none', letterSpacing: '0.5px' }}>{displayLabel}</span>
+                    </Link>
+                  );
+                })}
+              </div>
+            )}
+          </div>
           <Link to="/contact">{t('contact')}</Link>
           <Link to="/faq">{t('faq')}</Link>
         </nav>
@@ -320,7 +363,7 @@ export const Header = ({ cart, onRemoveFromCart, onChangeQty }: HeaderProps) => 
               aria-label="Sprache wählen"
               title="Sprache"
             >
-              {languageFlags[language]}
+              <span className="lang-flag lang-flag-toggle">{languageFlags[language]}</span>
             </button>
             {showLangMenu && (
               <div className="lang-menu">

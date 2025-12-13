@@ -54,10 +54,10 @@ export const ProductCard = ({ product, onAddToCart }: ProductCardProps) => {
         <h3 style={{ color: '#333', fontSize: '16px', fontWeight: '600', padding: '0 16px', marginTop: '8px', marginBottom: '4px' }}>
           {translatedName}
         </h3>
-        <p style={{ color: '#8DA5FF', fontSize: '16px', fontWeight: '600', padding: '0 16px', marginBottom: '8px' }}>
-          {product.price.toFixed(2)} €
-        </p>
       </Link>
+      <p style={{ color: '#8DA5FF', fontSize: '16px', fontWeight: '600', padding: '0 16px', marginBottom: '8px', marginTop: 0 }}>
+        {product.price.toFixed(2)} €
+      </p>
       <div className="qty-wrap">
         <label htmlFor={`qty-${product.id}`}>{t('quantityLabel')}: </label>
         <input

@@ -16,11 +16,18 @@
 
   img {
     width: 100%;
-    height: auto;
-    max-height: 220px;
+    height: 180px;
     object-fit: contain;
     background: white;
     padding: 8px;
+    display: block;
+    transition: background 0.3s, box-shadow 0.3s;
+  }
+
+  html.dark-mode & img {
+    background: rgba(36, 36, 36, 0.92);
+    box-shadow: 0 6px 18px rgba(0,0,0,0.38);
+    border-radius: 10px;
   }
 
   h3,

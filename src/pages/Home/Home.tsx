@@ -1,10 +1,10 @@
-import { useEffect, useState, useRef } from 'react';
+import { useEffect, useState, useRef, useMemo } from 'react';
 import { Link } from 'react-router-dom';
 import { products } from '../../data/products';
 import { useLanguage } from '../../contexts/LanguageContext';
 import './Home.scss';
 
-const hero = `${import.meta.env.BASE_URL}images/hero.jpg`;
+const hero = `${import.meta.env.BASE_URL}images/display_bilder/hero.jpg`;
 
 interface HomePageProps {
   onAddToCart: (productId: string, name: string, price: number, qty: number) => void;
@@ -16,7 +16,41 @@ export const HomePage = ({ onAddToCart }: HomePageProps) => {
   const [isResetting, setIsResetting] = useState(false);
   const [addingId, setAddingId] = useState<string | null>(null);
   const carouselRef = useRef<HTMLDivElement>(null);
-  const displayProducts = products.slice(0, 8);
+  // Select 2-3 random products per category for the bestseller carousel
+
+  function getRandomItems<T>(arr: T[], n: number): T[] {
+    if (arr.length <= n) return arr;
+    const result = [] as T[];
+    const used = new Set<number>();
+    while (result.length < n && used.size < arr.length) {
+      const idx = Math.floor(Math.random() * arr.length);
+      if (!used.has(idx)) {
+        used.add(idx);
+        result.push(arr[idx]);
+      }
+    }
+    return result;
+  }
+
+  const categoryIds = [
+    'boba',
+    'sirup',
+    'tapioka',
+    'tee',
+    'pulver',
+    'jelly',
+    'jellyjuice',
+    'crystal',
+    'diy',
+    'zubehor',
+  ];
+
+  const displayProducts = useMemo(() => {
+    return categoryIds.flatMap(cat => {
+      const prods = products.filter(p => p.category === cat);
+      return getRandomItems(prods, 2 + Math.floor(Math.random() * 2)); // 2-3 random
+    });
+  }, [products]);
   const visibleCount = 4;
   const categories = [
     { id: 'boba', label: t('boba') },

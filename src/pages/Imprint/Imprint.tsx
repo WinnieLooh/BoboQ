@@ -24,12 +24,12 @@ export const ImprintPage = () => {
 
         <h2>Umsatzsteuer-ID</h2>
         <p>
-          <strong>USt-IdNr.:</strong> [UST-ID-NUMMER]
+          <strong>USt-IdNr.:</strong> DE123456789
         </p>
 
         <h2>Verantwortlich für den Inhalt (§ 55 Abs. 2 RStV)</h2>
         <p>
-          [NAME], [ADRESSE]
+          Christian Zhang, Marktstr. 10-E38, 50968 Köln, Deutschland
         </p>
       </div>
     </div>

@@ -72,7 +72,7 @@ export const translations = {
     privacy: 'Datenschutz',
     
     // Categories
-    boba: 'Boba',
+    boba: 'Pop Ball',
     tapioka: 'Tapioka',
     tee: 'Tee',
     sirup: 'Sirup',
@@ -131,6 +131,10 @@ export const translations = {
     faqAnswer4: 'Viele unserer Produkte können vegan zubereitet werden. Fragen Sie bitte das Personal.',
     faqQuestion5: 'Wie lange dauert die Lieferung?',
     faqAnswer5: 'Die Lieferung dauert normalerweise 2-3 Werktage nach Bestellung.',
+    faqQuestion6: 'Woher stammen die Produkte von BoboQ?',
+    faqAnswer6: 'Unsere Produkte werden direkt aus Taiwan importiert und per Schiff nach Deutschland gebracht. So garantieren wir authentische Qualität und frische Zutaten.',
+    faqQuestion7: 'In welchem Umkreis liefern wir?',
+    faqAnswer7: 'Wir liefern im Umkreis von etwa 100 Kilometern rund um Köln aus. Für größere Entfernungen oder spezielle Anfragen kontaktieren Sie uns bitte direkt.',
     
     // Auth Pages
     login: 'Anmelden',

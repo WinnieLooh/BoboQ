@@ -10,16 +10,34 @@
       margin-bottom: 30px;
     }
 
-    h3 {
+    .faq-item {
+      margin-bottom: 18px;
+    }
+
+    .faq-question {
       margin-top: 24px;
       margin-bottom: 12px;
       color: var(--primary-color);
+      transition: color 0.2s;
+      cursor: pointer;
+      outline: none;
     }
 
-    p {
+    .faq-question:focus {
+      color: var(--accent-color, #ff9800);
+      text-decoration: underline;
+    }
+
+    .faq-answer {
       margin-bottom: 16px;
       line-height: 1.8;
       color: var(--text-color);
+      animation: fadeIn 0.2s;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
     }
   }
 }
