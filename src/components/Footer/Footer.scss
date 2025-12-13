@@ -181,3 +181,11 @@ footer.site-footer {
     }
   }
 }
+
+/* Darker footer in dark mode */
+html.dark-mode footer.site-footer {
+  /* ~12-15% darker than primary */
+  background: color-mix(in srgb, var(--primary-color) 85%, #000 15%);
+  border-top-color: color-mix(in srgb, var(--primary-color) 85%, #000 15%);
+  box-shadow: 0 -3px 8px rgba(0, 0, 0, 0.35);
+}
