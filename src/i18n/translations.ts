@@ -702,6 +702,6 @@ export const translations = {
   },
 };
 
-export const getTranslation = (lang: Language, key: keyof typeof translations.de): string => {
-  return translations[lang][key] || translations.de[key];
+export const getTranslation = (lang: Language, key: string): string => {
+  return (translations[lang] as any)[key] || (translations.de as any)[key] || key;
 };
