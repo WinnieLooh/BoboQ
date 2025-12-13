@@ -1,6 +1,7 @@
 .home-page {
   background: #faf7f3;
   min-height: 100vh;
+  padding-top: 110px;
 
   .layout {
     padding: 48px 15% 0;
@@ -502,6 +503,90 @@
           color: var(--primary-dark);
         }
       }
+    }
+  }
+}
+
+/* Optimize for large iPhones (iPhone 16 Pro Max, etc.) */
+@media (max-width: 480px) and (min-height: 820px) {
+  .home-page {
+    .hero {
+      height: 280px;
+
+      .hero-content {
+        h1 {
+          font-size: 42px;
+          margin-bottom: 16px;
+        }
+
+        p {
+          font-size: 20px;
+        }
+      }
+    }
+
+    .hero-spacer {
+      height: 32px;
+    }
+
+    .layout {
+      padding: 32px 12% 0;
+    }
+
+    .title-center {
+      font-size: 28px;
+      margin-bottom: 24px;
+    }
+
+    .b2b-intro {
+      padding: 32px 24px;
+      margin: 32px 0;
+
+      h3 {
+        font-size: 22px;
+        margin-bottom: 16px;
+      }
+
+      p {
+        font-size: 16px;
+        line-height: 1.8;
+      }
+    }
+
+    .category-grid {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 16px;
+      margin: 8px 0 4px;
+
+      .category-card {
+        padding: 20px;
+
+        img {
+          height: 140px;
+          margin-bottom: 14px;
+        }
+
+        span {
+          font-size: 15px;
+        }
+      }
+    }
+
+    .featured-spacer {
+      height: 48px;
+    }
+
+    .carousel-container {
+      margin: 24px 0;
+
+      button {
+        font-size: 24px;
+        padding: 12px 16px;
+      }
+    }
+
+    .carousel-slide {
+      min-width: 50%;
     }
   }
 }

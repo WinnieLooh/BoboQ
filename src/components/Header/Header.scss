@@ -12,6 +12,10 @@ header.header {
 
   .container {
     flex-wrap: wrap;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    justify-content: space-between;
   }
 
   .brand {
@@ -710,45 +714,147 @@ header.header {
 
 @media (max-width: 480px) {
   header.header {
-    padding: 8px 0;
+    padding: 8px 8px;
+
+    .container {
+      flex-wrap: wrap;
+      gap: 4px;
+      display: flex;
+      align-items: center;
+    }
+
+    .brand {
+      order: 1;
+      flex: 0 0 auto;
+    }
 
     .brand img {
-      height: 28px;
-    }
-
-    .nav-right {
-      gap: 6px;
-    }
-
-    .nav-search input {
-      font-size: 16px;
-      padding: 8px 10px;
+      height: 40px;
     }
 
     .nav-center {
-      gap: 8px;
+      order: 3;
+      flex: 1 1 100%;
+      gap: 4px;
+      margin-left: 0;
+      justify-content: flex-start;
+      padding: 0 8px;
+      margin-top: 4px;
+      flex-wrap: wrap;
 
       a {
-        font-size: 12px;
-        height: 24px;
+        font-size: 11px;
+        height: auto;
+        padding: 4px 6px;
+        min-height: 44px;
+        display: flex;
+        align-items: center;
       }
     }
 
-    .lang-toggle,
-    .theme-toggle {
-      width: 32px;
-      height: 32px;
-      font-size: 16px;
+    .nav-right {
+      order: 2;
+      gap: 4px;
+      flex: 0 0 auto;
+      display: flex;
+      align-items: center;
+      flex-wrap: nowrap;
+    }
+
+    .nav-search {
+      flex: 0 0 auto;
+      order: 1;
+    }
+
+    .nav-search input {
+      font-size: 14px;
+      padding: 6px 8px;
+      height: 36px;
+      min-width: 110px;
+      max-width: 130px;
+    }
+
+    .cart-wrapper {
+      flex: 0 0 auto;
+      order: 2;
     }
 
     .cart {
-      font-size: 20px;
+      font-size: 18px;
+      min-height: 44px;
+      min-width: 44px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0;
     }
 
     .cart-badge {
       width: 18px;
       height: 18px;
       font-size: 10px;
+    }
+
+    .lang-selector,
+    .theme-toggle {
+      flex: 0 0 auto;
+      order: 3;
+    }
+
+    .lang-toggle,
+    .theme-toggle {
+      width: 36px;
+      height: 36px;
+      font-size: 16px;
+      min-height: 44px;
+      min-width: 44px;
+      padding: 0;
+    }
+
+    .auth-menu,
+    .login-btn {
+      display: none;
+    }
+  }
+}
+
+/* Optimize for large iPhones (iPhone 16 Pro Max, etc.) */
+@media (max-width: 480px) and (min-height: 820px) {
+  header.header {
+    padding: 12px 0;
+
+    .brand img {
+      height: 48px;
+    }
+
+    .nav-right {
+      gap: 12px;
+    }
+
+    .nav-center {
+      gap: 12px;
+
+      a {
+        font-size: 14px;
+        height: 32px;
+      }
+    }
+
+    .lang-toggle,
+    .theme-toggle {
+      width: 40px;
+      height: 40px;
+      font-size: 18px;
+    }
+
+    .cart {
+      font-size: 24px;
+    }
+
+    .cart-badge {
+      width: 22px;
+      height: 22px;
+      font-size: 12px;
     }
   }
 }

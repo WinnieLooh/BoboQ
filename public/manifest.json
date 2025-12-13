@@ -1,0 +1,72 @@
+{
+  "name": "BoboQ - Premium Bubble Tea Supplies",
+  "short_name": "BoboQ",
+  "description": "BoboQ - B2B Bulk Bubble Tea Products, Equipment & Supplies",
+  "start_url": "/BoboQ/",
+  "scope": "/BoboQ/",
+  "display": "standalone",
+  "orientation": "portrait-primary",
+  "background_color": "#faf7f3",
+  "theme_color": "#B2C0FF",
+  "icons": [
+    {
+      "src": "/BoboQ/images/boboq_logo/_cropped.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/BoboQ/images/boboq_logo/_cropped.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/BoboQ/images/boboq_logo/_cropped.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ],
+  "categories": ["shopping", "business"],
+  "screenshots": [
+    {
+      "src": "/BoboQ/images/boboq_logo/_cropped.png",
+      "sizes": "540x720",
+      "type": "image/png",
+      "form_factor": "narrow"
+    },
+    {
+      "src": "/BoboQ/images/boboq_logo/_cropped.png",
+      "sizes": "1280x720",
+      "type": "image/png",
+      "form_factor": "wide"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Shop",
+      "short_name": "Shop",
+      "description": "Browse our products",
+      "url": "/BoboQ/shop",
+      "icons": [
+        {
+          "src": "/BoboQ/images/boboq_logo/_cropped.png",
+          "sizes": "192x192"
+        }
+      ]
+    },
+    {
+      "name": "Cart",
+      "short_name": "Cart",
+      "description": "View your cart",
+      "url": "/BoboQ/cart",
+      "icons": [
+        {
+          "src": "/BoboQ/images/boboq_logo/_cropped.png",
+          "sizes": "192x192"
+        }
+      ]
+    }
+  ]
+}
