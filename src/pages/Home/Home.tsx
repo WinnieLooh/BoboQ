@@ -53,16 +53,16 @@ export const HomePage = ({ onAddToCart }: HomePageProps) => {
   }, [products]);
   const visibleCount = 4;
   const categories = [
-    { id: 'boba', label: t('boba') },
-    { id: 'sirup', label: t('sirup') },
-    { id: 'tapioka', label: t('tapioka') },
-    { id: 'tee', label: t('tee') },
-    { id: 'pulver', label: t('pulver') },
-    { id: 'jelly', label: t('jelly') },
-    { id: 'jellyjuice', label: t('jellyjuice') },
-    { id: 'crystal', label: t('crystal') },
-    { id: 'diy', label: t('diy') },
-    { id: 'zubehor', label: t('zubehor') },
+    { id: 'boba', label: t('boba'), image: '/BoboQ/images/display_bilder/product_categories/pop_ball.png' },
+    { id: 'sirup', label: t('sirup'), image: '/BoboQ/images/display_bilder/product_categories/sirup.png' },
+    { id: 'tapioka', label: t('tapioka'), image: '/BoboQ/images/display_bilder/product_categories/tapioka.png' },
+    { id: 'tee', label: t('tee'), image: '/BoboQ/images/display_bilder/product_categories/tea.png' },
+    { id: 'pulver', label: t('pulver'), image: '/BoboQ/images/display_bilder/product_categories/powders.png' },
+    { id: 'jelly', label: t('jelly'), image: '/BoboQ/images/display_bilder/product_categories/jelly.png' },
+    { id: 'jellyjuice', label: t('jellyjuice'), image: '/BoboQ/images/display_bilder/product_categories/jelly_juice_cropped.png' },
+    { id: 'crystal', label: t('crystal'), image: '/BoboQ/images/display_bilder/product_categories/crystal_ball.png' },
+    { id: 'zubehor', label: t('zubehor'), image: '/BoboQ/images/display_bilder/product_categories/Verschweissmaschine.png' },
+    { id: 'diy', label: t('diy'), image: '/BoboQ/images/display_bilder/product_categories/erdbeer_maracuja_apfel.png' },
   ];
 
   const goNext = () => {
@@ -147,16 +147,12 @@ export const HomePage = ({ onAddToCart }: HomePageProps) => {
           <h2 className="title-center">{t('productsTitle')}</h2>
 
           <div className="category-grid">
-            {categories.map((cat) => {
-              const product = products.find((p) => p.category === cat.id);
-              if (!product) return null;
-              return (
-                <Link key={cat.id} to={`/shop?category=${cat.id}`} className="category-card">
-                  <img src={product.image} alt={cat.label} />
-                  <span>{cat.label}</span>
-                </Link>
-              );
-            })}
+            {categories.map((cat) => (
+              <Link key={cat.id} to={`/shop?category=${cat.id}`} className="category-card">
+                <img src={cat.image} alt={cat.label} />
+                <span>{cat.label}</span>
+              </Link>
+            ))}
           </div>
 
           <div className="featured-spacer" aria-hidden="true"></div>

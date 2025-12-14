@@ -29,9 +29,11 @@ export function ProductDetailPage({ onAddToCart }: ProductDetailPageProps) {
   }
 
   const handleAddToCart = () => onAddToCart(product.id, product.name, product.price, quantity);
-  const translatedName = tp(product.id, product.name);
   const isBoboQProduct = product.image.toLowerCase().includes('boboq') || 
                          product.name.toLowerCase().includes('boboq');
+  const isNestleProduct = product.name.toLowerCase().includes('nestlé');
+  const cleanName = product.name.replace(/Nestlé /i, '');
+  const translatedName = tp(product.id, cleanName);
 
   return (
     <div className="product-detail-page">
@@ -41,7 +43,11 @@ export function ProductDetailPage({ onAddToCart }: ProductDetailPageProps) {
           <span className="badge">{t('detailBadge')}</span>
         </div>
         <div className="info">
-            {isBoboQProduct && <div className="product-brand">BOBOQ</div>}
+          {isNestleProduct ? (
+            <div className="product-brand">Nestlé</div>
+          ) : (
+            isBoboQProduct && <div className="product-brand">BOBOQ</div>
+          )}
           <h1>{translatedName}</h1>
           <p className="price">{product.price.toFixed(2)} €</p>
           {product.description && (

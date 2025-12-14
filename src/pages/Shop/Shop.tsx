@@ -120,13 +120,18 @@ export const ShopPage = ({ onAddToCart }: ShopPageProps) => {
 
           <div className="products" id="products">
             {filteredProducts.length > 0 ? (
-              filteredProducts.map((product) => (
-                <ProductCard
-                  key={product.id}
-                  product={product}
-                  onAddToCart={onAddToCart}
-                />
-              ))
+              filteredProducts.map((product) => {
+                const isNestleProduct = product.name.toLowerCase().includes('coffee-mate');
+                const cleanName = product.name.replace(/BOBOQ /i, '');
+                return (
+                  <ProductCard
+                    key={product.id}
+                    product={{ ...product, name: cleanName }}
+                    onAddToCart={onAddToCart}
+                    brand={isNestleProduct ? 'Nestlé' : undefined} // Add Nestlé above coffee-mate
+                  />
+                );
+              })
             ) : (
               <p className="no-products">Keine Produkte gefunden.</p>
             )}

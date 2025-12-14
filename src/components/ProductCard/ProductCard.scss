@@ -126,6 +126,35 @@
       pointer-events: none;
     }
   }
+
+  .product-brand {
+    padding: 4px 16px 0;
+    margin-top: 8px;
+    margin-bottom: 2px;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    color: #8DA5FF;
+    text-transform: uppercase;
+  }
+
+  .product-title {
+    color: #333;
+    font-size: 16px;
+    font-weight: 600;
+    padding: 0 16px;
+    margin-top: 8px;
+    margin-bottom: 4px;
+  }
+
+  .product-price {
+    color: #8DA5FF;
+    font-size: 16px;
+    font-weight: 600;
+    padding: 0 16px;
+    margin-bottom: 8px;
+    margin-top: 0;
+  }
 }
 
 @keyframes addPulse {
