@@ -3,8 +3,6 @@ import { useLanguage } from '../../contexts/LanguageContext';
 import { useNavigate } from 'react-router-dom';
 import type { CartItem } from '../../types';
 import './Cart.scss';
-import { useState } from 'react';
-import { useAuth } from '../../contexts/AuthContext';
 
 const SHIPPING_COST = 5.99;
 
@@ -17,13 +15,9 @@ interface CartPageProps {
 export const CartPage = ({ cart, onRemove, onChangeQty }: CartPageProps) => {
   const { t } = useLanguage();
   const navigate = useNavigate();
-  const { user } = useAuth();
   const subtotal = cart.reduce((sum, item) => sum + item.price * item.qty, 0);
   const total = subtotal + SHIPPING_COST;
 
-  const handleCheckout = () => {
-    navigate('/checkout');
-  };
 
   const handleRequestQuote = () => {
     navigate('/checkout', { replace: true, state: { guest: true, fromQuote: true, forceGuest: true } });
@@ -63,9 +57,9 @@ export const CartPage = ({ cart, onRemove, onChangeQty }: CartPageProps) => {
                   <span>{SHIPPING_COST.toFixed(2)} €</span>
                 </div>
               </div>
-              <h3 id="total" style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start' }}>
+              <h3 id="total" className="total-amount">
                 <span>Estimated Total Amount:</span>
-                <span style={{ fontSize: '1.1em', fontWeight: 600 }}>{total.toFixed(2)} €</span>
+                <span className="total-amount-value">{total.toFixed(2)} </span>
               </h3>
               <div className="cart-actions">
                 <button className="quote-btn" onClick={handleRequestQuote}>

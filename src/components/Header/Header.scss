@@ -81,8 +81,9 @@ header.header {
   /* Slightly darker than theme in dark mode */
   html.dark-mode & {
     /* ~12-15% darker than primary */
-    background: color-mix(in srgb, var(--primary-color) 85%, #000 15%);
-    border-bottom-color: color-mix(in srgb, var(--primary-color) 85%, #000 15%);
+    /* Fallback für color-mix */
+    background: var(--primary-color);
+    border-bottom-color: var(--primary-dark);
     box-shadow: 0 2px 6px rgba(0, 0, 0, 0.35);
   }
 

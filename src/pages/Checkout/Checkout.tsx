@@ -2,7 +2,6 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../../contexts/AuthContext';
 import { useLanguage } from '../../contexts/LanguageContext';
-import axios from 'axios';
 import './Checkout.scss';
 
 interface CheckoutProps {
@@ -15,7 +14,7 @@ const SHIPPING_COST = 5.99;
 export const CheckoutPage = ({ cart, onCheckoutComplete }: CheckoutProps) => {
   const { user, token } = useAuth();
   const { t, tp } = useLanguage();
-  const [guestEmail, setGuestEmail] = useState('');
+  const [guestEmail] = useState('');
   const [guestFirstName, setGuestFirstName] = useState('');
   const [guestLastName, setGuestLastName] = useState('');
   const [address, setAddress] = useState('');
@@ -86,42 +85,6 @@ export const CheckoutPage = ({ cart, onCheckoutComplete }: CheckoutProps) => {
       setTimeout(() => navigate('/'), 2000);
     } catch {
       setError(t('orderError'));
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  const handleRequestOffer = async () => {
-    if (!token && !guestEmail) {
-      setError(t('authOrEmailRequired'));
-      return;
-    }
-
-    if (!guestEmail && isGuestCheckout) {
-      setError(t('emailRequired'));
-      return;
-    }
-
-    if (guestEmail && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(guestEmail)) {
-      setError(t('invalidEmail'));
-      return;
-    }
-
-    try {
-      setLoading(true);
-      setError('');
-      setSuccessMessage('');
-
-      await axios.post('http://localhost:5000/api/email/send-offer', {
-        subject: 'Angebot anfordern',
-        message: `Ein Benutzer hat ein Angebot angefordert. Details: ${JSON.stringify(cart)}`,
-        ...(guestEmail && { guestEmail })
-      });
-
-      setSuccessMessage('Angebotsanfrage wurde erfolgreich gesendet. Bitte überprüfen Sie Ihre E-Mail für weitere Informationen.');
-    } catch (error) {
-      console.error('Error requesting offer:', error);
-      setError('Fehler beim Anfordern des Angebots. Bitte versuchen Sie es später erneut.');
     } finally {
       setLoading(false);
     }

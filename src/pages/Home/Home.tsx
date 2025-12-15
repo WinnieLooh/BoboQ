@@ -185,8 +185,8 @@ export const HomePage = ({ onAddToCart }: HomePageProps) => {
                     <Link to={`/product/${product.id}`} className="slide-link" aria-label={`${translatedName} ${t('description')}`}>
                       <img src={product.image} alt={translatedName} />
                       {isBoboQProduct && <div className="product-brand">BOBOQ</div>}
-                      <h3 style={{ color: '#e4e4e4', fontSize: '15px', fontWeight: 600, lineHeight: '1.4', marginBottom: '6px' }}>{translatedName}</h3>
-                      <p style={{ color: '#8DA5FF', fontSize: '14px', fontWeight: 600 }}>{product.price.toFixed(2)} €</p>
+                      <h3 className="carousel-product-title">{translatedName}</h3>
+                      <p className="carousel-product-price">{product.price.toFixed(2)} €</p>
                     </Link>
                     <button
                       className={`add-to-cart-btn ${addingId === product.id ? 'adding' : ''}`}
