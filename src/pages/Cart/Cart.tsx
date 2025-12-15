@@ -59,7 +59,11 @@ export const CartPage = ({ cart, onRemove, onChangeQty }: CartPageProps) => {
               </div>
               <h3 id="total" className="total-amount">
                 <span>Estimated Total Amount:</span>
+<<<<<<< HEAD
                 <span className="total-amount-value">{total.toFixed(2)} </span>
+=======
+                 <span className="total-amount-value">{total.toFixed(2)} €</span>
+>>>>>>> dd69c1e (style(cart): optimize cart for iOS/mobile and smaller product boxes)
               </h3>
               <div className="cart-actions">
                 <button className="quote-btn" onClick={handleRequestQuote}>
