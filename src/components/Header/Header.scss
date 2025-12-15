@@ -1,4 +1,4 @@
-  .nav-products-dropdown {
+.nav-products-dropdown {
     position: relative;
     display: inline-block;
     .nav-products-link {
@@ -929,4 +929,19 @@ header.header {
       font-size: 12px;
     }
   }
+}
+
+.cat-dropdown-item span {
+  text-transform: none;
+  letter-spacing: 0.5px;
+}
+
+.cat-dropdown-item.diy span {
+  text-transform: uppercase;
+}
+
+html.dark-mode .cart-preview .cart-preview-item .item-controls .qty-input {
+  color: #fff;
+  background: #23243a;
+  border-color: #44445a;
 }

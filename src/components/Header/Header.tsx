@@ -200,12 +200,12 @@ export const Header = ({ cart, onRemoveFromCart, onChangeQty }: HeaderProps) => 
                   else displayLabel = label.charAt(0).toUpperCase() + label.slice(1).toLowerCase();
                   return (
                     <Link
-                      to={`/shop?cat=${cat.key}`}
+                      to={`/shop?category=${cat.key}`}
                       className="cat-dropdown-item"
                       key={cat.key}
                     >
                       <img src={cat.image} alt={displayLabel} className="cat-dropdown-img" />
-                      <span style={{ textTransform: cat.key === 'diy' ? 'uppercase' : 'none', letterSpacing: '0.5px' }}>{displayLabel}</span>
+                      <span className={cat.key === 'diy' ? 'diy' : ''}>{displayLabel}</span>
                     </Link>
                   );
                 })}

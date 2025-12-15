@@ -1,20 +1,20 @@
-const sqlite3 = require('sqlite3').verbose();
+const Database = require('better-sqlite3');
 const path = require('path');
 
 const dbPath = path.join(__dirname, 'boboq.db');
 
-const db = new sqlite3.Database(dbPath, (err) => {
-  if (err) {
-    console.error('Error opening database:', err);
-  } else {
-    console.log('Database connection successful');
-    initializeDatabase();
-  }
-});
+let db;
+try {
+  db = new Database(dbPath);
+  console.log('Database connection successful');
+  initializeDatabase();
+} catch (err) {
+  console.error('Error opening database:', err);
+}
 
 function initializeDatabase() {
   // Users table
-  db.run(`
+  db.prepare(`
     CREATE TABLE IF NOT EXISTS users (
       id INTEGER PRIMARY KEY AUTOINCREMENT,
       email TEXT UNIQUE NOT NULL,
@@ -27,10 +27,10 @@ function initializeDatabase() {
       country TEXT,
       createdAt DATETIME DEFAULT CURRENT_TIMESTAMP
     )
-  `);
+  `).run();
 
   // Orders table
-  db.run(`
+  db.prepare(`
     CREATE TABLE IF NOT EXISTS orders (
       id INTEGER PRIMARY KEY AUTOINCREMENT,
       userId INTEGER,
@@ -46,19 +46,7 @@ function initializeDatabase() {
       createdAt DATETIME DEFAULT CURRENT_TIMESTAMP,
       FOREIGN KEY (userId) REFERENCES users(id)
     )
-  `);
-
-  // Order items table
-  db.run(`
-    CREATE TABLE IF NOT EXISTS order_items (
-      id INTEGER PRIMARY KEY AUTOINCREMENT,
-      orderId INTEGER NOT NULL,
-      productName TEXT NOT NULL,
-      productPrice REAL NOT NULL,
-      quantity INTEGER NOT NULL,
-      FOREIGN KEY (orderId) REFERENCES orders(id)
-    )
-  `);
+  `).run();
 }
 
 module.exports = db;

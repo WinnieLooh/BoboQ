@@ -71,3 +71,53 @@ npm run preview
 - Dark mode is toggled via a button in the header and persisted in `localStorage`.
 - Language selection is accessible in the header; translations live in `src/i18n/translations.ts`.
 - Product name translation leverages the `LanguageContext` transliteration map.
+
+## Email Functionality Setup
+
+To enable the email functionality for the "Request Offer" feature, follow these steps:
+
+### Backend Setup
+1. **Install Dependencies**:
+   Ensure the required dependencies are installed in the backend:
+   ```bash
+   cd backend
+   npm install
+   ```
+
+2. **Environment Variables**:
+   Configure the following environment variables in a `.env` file in the `backend` directory:
+   ```env
+   PORT=5000
+   EMAIL_USER=your-email@example.com
+   EMAIL_PASS=your-email-password
+   ```
+   Replace `your-email@example.com` and `your-email-password` with the credentials of the email account you want to use for sending emails.
+
+3. **Start the Backend**:
+   Run the backend server:
+   ```bash
+   npm start
+   ```
+
+### Frontend Setup
+1. **Install Dependencies**:
+   Ensure the required dependencies are installed in the frontend:
+   ```bash
+   npm install
+   ```
+
+2. **Start the Frontend**:
+   Run the development server:
+   ```bash
+   npm run dev
+   ```
+
+### Testing the Feature
+1. Navigate to the Checkout page in the application.
+2. Ensure you are logged in or provide an email address in the designated field.
+3. Click the "Request Offer" button to send an email.
+
+### Notes
+- The backend must be running on `http://localhost:5000` for the frontend to communicate with it.
+- Ensure that the email credentials provided have permission to send emails via the configured service (e.g., Outlook365).
+- Check the browser console and backend logs for any errors during testing.

@@ -21,18 +21,6 @@ export const Footer = () => {
             {t('imprint')}
           </Link>
         </div>
-        <div className="icons">
-          <a
-            href="https://wa.me/4915234768935"
-            className="whatsapp"
-            aria-label="WhatsApp"
-            target="_blank"
-            rel="noopener noreferrer"
-            title="+49 1523 476 89 35"
-          >
-            <img src={img('socials_logo/whatsapp.png')} alt="WhatsApp: +49 1523 476 89 35" />
-          </a>
-        </div>
       </div>
     </footer>
   );

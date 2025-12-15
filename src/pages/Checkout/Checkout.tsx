@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../../contexts/AuthContext';
 import { useLanguage } from '../../contexts/LanguageContext';
+import axios from 'axios';
 import './Checkout.scss';
 
 interface CheckoutProps {
@@ -90,6 +91,42 @@ export const CheckoutPage = ({ cart, onCheckoutComplete }: CheckoutProps) => {
     }
   };
 
+  const handleRequestOffer = async () => {
+    if (!token && !guestEmail) {
+      setError(t('authOrEmailRequired'));
+      return;
+    }
+
+    if (!guestEmail && isGuestCheckout) {
+      setError(t('emailRequired'));
+      return;
+    }
+
+    if (guestEmail && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(guestEmail)) {
+      setError(t('invalidEmail'));
+      return;
+    }
+
+    try {
+      setLoading(true);
+      setError('');
+      setSuccessMessage('');
+
+      await axios.post('http://localhost:5000/api/email/send-offer', {
+        subject: 'Angebot anfordern',
+        message: `Ein Benutzer hat ein Angebot angefordert. Details: ${JSON.stringify(cart)}`,
+        ...(guestEmail && { guestEmail })
+      });
+
+      setSuccessMessage('Angebotsanfrage wurde erfolgreich gesendet. Bitte überprüfen Sie Ihre E-Mail für weitere Informationen.');
+    } catch (error) {
+      console.error('Error requesting offer:', error);
+      setError('Fehler beim Anfordern des Angebots. Bitte versuchen Sie es später erneut.');
+    } finally {
+      setLoading(false);
+    }
+  };
+
   if (!user && !isGuestCheckout) {
     return (
       <div className="checkout-page">
@@ -164,17 +201,6 @@ export const CheckoutPage = ({ cart, onCheckoutComplete }: CheckoutProps) => {
                       />
                     </div>
                   </div>
-
-                  <div className="form-group">
-                    <label htmlFor="guestEmail">{t('email')}</label>
-                    <input
-                      id="guestEmail"
-                      type="email"
-                      value={guestEmail}
-                      onChange={(e) => setGuestEmail(e.target.value)}
-                      placeholder="max@example.com"
-                    />
-                  </div>
                 </>
               ) : (
                 <div className="form-group">
@@ -235,7 +261,7 @@ export const CheckoutPage = ({ cart, onCheckoutComplete }: CheckoutProps) => {
               </div>
 
               <button type="submit" className="checkout-btn" disabled={loading}>
-                {loading ? t('processing') : t('placeOrder')}
+                {loading ? t('processing') : 'Request Quote'}
               </button>
             </form>
           </div>
@@ -270,7 +296,7 @@ export const CheckoutPage = ({ cart, onCheckoutComplete }: CheckoutProps) => {
             </div>
 
             <div className="summary-row total">
-              <span>{t('totalPrice')}:</span>
+              <span>Estimated Total Amount:</span>
               <span className="total-price">{totalPrice.toFixed(2)} €</span>
             </div>
           </div>
