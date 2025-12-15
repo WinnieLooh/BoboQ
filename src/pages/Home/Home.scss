@@ -1,3 +1,9 @@
+@media (max-width: 600px) {
+  .carousel-container .carousel-track .carousel-slide {
+    min-width: 50% !important;
+    max-width: 50%;
+  }
+}
 // Carousel product styles
 .carousel-product-title {
   color: #e4e4e4;
