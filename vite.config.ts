@@ -6,4 +6,9 @@ export default defineConfig({
   // Serve from subdirectory for GitHub Pages
   base: '/BoboQ/',
   plugins: [react()],
+  server: {
+    proxy: {
+      '/api': 'http://localhost:5000'
+    }
+  }
 })

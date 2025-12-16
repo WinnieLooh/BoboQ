@@ -26,6 +26,7 @@
     "react-dom": "^19.2.0",
     "react-router-dom": "^7.10.1",
     "sass": "^1.96.0",
+    "uuid": "^13.0.0",
     "winston": "^3.19.0"
   },
   "devDependencies": {

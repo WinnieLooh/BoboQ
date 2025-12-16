@@ -1,11 +1,12 @@
+
 // This script will insert all products into the PostgreSQL database with UUIDs and imageUrl field.
-const { pool } = require('./postgres');
-const { v4: uuidv4 } = require('uuid');
+import { pool } from './postgres.js';
+import { v4 as uuidv4 } from 'uuid';
 
 // All products, grouped by category, no id field, use imageUrl
 const products = [
   // Pop Ball
-  { name: 'Ananas - Pop Ball', price: 4.9, imageUrl: 'boboq_popball/ananas.png', category: 'boba', description: 'Erfrischende Ananas Popping Boba mit tropischem Geschmack. Perfekt für sommerliche Bubble Tea Kreationen.' },
+  { name: 'Ananas - Pop Ball', price: 4.9, imageUrl: 'boboq_popball/ananas.png', category: 'boba', description: 'Erfrischende Ananas Popping Boba mit tropischem Geschmack. Perfekt für sommerliche Bubble Tea Kreationen.', brand: 'BoboQ' },
   { name: 'Apfel - Pop Ball', price: 4.9, imageUrl: 'boboq_popball/apfel.png', category: 'boba', description: 'Knackig-frische Apfel Popping Boba mit süß-säuerlichem Aroma. Ideal für klassische Frucht-Tees.' },
   { name: 'Banane - Pop Ball', price: 4.9, imageUrl: 'boboq_popball/banane.png', category: 'boba', description: 'Cremige Bananen Popping Boba mit mildem, süßem Geschmack. Großartig für Milchtee-Variationen.' },
   { name: 'Brauner Zucker - Pop Ball', price: 4.9, imageUrl: 'boboq_popball/brauner_zucker.png', category: 'boba', description: 'Karamellisierter brauner Zucker Popping Boba mit reichem, süßem Geschmack. Der Klassiker für authentischen Bubble Tea.' },
@@ -104,19 +105,19 @@ const products = [
   { name: 'Vanille Pulver', price: 13.9, imageUrl: 'boboq_powder/vanille.png', category: 'pulver', description: 'PLACEHOLDER' },
   { name: 'Wassermelone Pulver', price: 12.9, imageUrl: 'boboq_powder/wassermeloe.png', category: 'pulver', description: 'PLACEHOLDER' },
   // Tapioka
-  { name: 'Erdbeer Tapioka', price: 7.9, imageUrl: 'tapioka/erdbeer.png', category: 'tapioka', description: 'Aromatisierte Erdbeer Tapioka-Perlen mit fruchtigem Geschmack. Bunter Hingucker im Bubble Tea.' },
-  { name: 'Mango Tapioka', price: 7.9, imageUrl: 'tapioka/mango.png', category: 'tapioka', description: 'Tropische Mango Tapioka-Perlen mit süßem Fruchtaroma. Perfekt für exotische Tee-Kreationen.' },
-  { name: 'Instant Tapioka', price: 8.9, imageUrl: 'tapioka/instant_tapioka.png', category: 'tapioka', description: 'Schnell kochende Tapioka-Perlen für die zeitsparende Zubereitung. Fertig in nur 5 Minuten.' },
-  { name: 'Klassische Tapioka', price: 7.5, imageUrl: 'tapioka/tapioka.png', category: 'tapioka', description: 'Original schwarze Tapioka-Perlen für authentischen Bubble Tea. Der zeitlose Klassiker.' },
-  { name: 'Taro Tapioka', price: 7.9, imageUrl: 'tapioka/taro.png', category: 'tapioka', description: 'Lila Taro Tapioka-Perlen mit süßem, nussigem Geschmack. Beliebt in Taiwan.' },
+  { name: 'Erdbeer Tapioka', price: 7.9, imageUrl: 'boboq_tapioka/erdbeer.png', category: 'tapioka', description: 'Aromatisierte Erdbeer Tapioka-Perlen mit fruchtigem Geschmack. Bunter Hingucker im Bubble Tea.' },
+  { name: 'Mango Tapioka', price: 7.9, imageUrl: 'boboq_tapioka/mango.png', category: 'tapioka', description: 'Tropische Mango Tapioka-Perlen mit süßem Fruchtaroma. Perfekt für exotische Tee-Kreationen.' },
+  { name: 'Instant Tapioka', price: 8.9, imageUrl: 'boboq_tapioka/instant_tapioka.png', category: 'tapioka', description: 'Schnell kochende Tapioka-Perlen für die zeitsparende Zubereitung. Fertig in nur 5 Minuten.' },
+  { name: 'Klassische Tapioka', price: 7.5, imageUrl: 'boboq_tapioka/tapioka.png', category: 'tapioka', description: 'Original schwarze Tapioka-Perlen für authentischen Bubble Tea. Der zeitlose Klassiker.' },
+  { name: 'Taro Tapioka', price: 7.9, imageUrl: 'boboq_tapioka/taro.png', category: 'tapioka', description: 'Lila Taro Tapioka-Perlen mit süßem, nussigem Geschmack. Beliebt in Taiwan.' },
   // Tea
-  { name: 'Aromatisierter Earl Grey Tee', price: 8.9, imageUrl: 'Tea/aromatisierter_earl-grey-tee.webp', category: 'tee', description: 'Klassischer Earl Grey mit Bergamotte-Aroma. Perfekt für elegante Milchtee-Kreationen.' },
-  { name: 'Aromatisierter Jasmin Grüntee', price: 8.9, imageUrl: 'Tea/aromatisierter_jasmin_grüntee.png', category: 'tee', description: 'Duftender Jasmin Grüntee mit blumigem Aroma. Ein asiatischer Klassiker für Bubble Tea.' },
-  { name: 'Assam Schwarztee', price: 7.9, imageUrl: 'Tea/assam_schwarztee.png', category: 'tee', description: 'Kräftiger Assam Schwarztee mit malzigem Charakter. Ideal für vollmundige Milchtees.' },
-  { name: 'Ceylon Schwarztee', price: 7.9, imageUrl: 'Tea/ceylon_schwarztee.png', category: 'tee', description: 'Eleganter Ceylon Schwarztee mit leicht zitrusartigen Noten. Perfekt für klassischen Bubble Tea.' },
-  { name: 'Gerösteter Oolong Tee', price: 9.9, imageUrl: 'Tea/geroesteter_oolong.png', category: 'tee', description: 'Gerösteter Oolong mit nussigen, karamelligen Noten. Premium-Qualität für Kenner.' },
-  { name: 'Oolong Tee', price: 9.9, imageUrl: 'Tea/oolong.png', category: 'tee', description: 'PLACEHOLDER' },
-  { name: 'Smaragd Grüntee', price: 9.9, imageUrl: 'Tea/smaragd_grüntee.png', category: 'tee', description: 'PLACEHOLDER' },
+  { name: 'Aromatisierter Earl Grey Tee', price: 8.9, imageUrl: 'boboq_tea/aromatisierter_earl-grey-tee.webp', category: 'tee', description: 'Klassischer Earl Grey mit Bergamotte-Aroma. Perfekt für elegante Milchtee-Kreationen.' },
+  { name: 'Aromatisierter Jasmin Grüntee', price: 8.9, imageUrl: 'boboq_tea/aromatisierter_jasmin_grüntee.png', category: 'tee', description: 'Duftender Jasmin Grüntee mit blumigem Aroma. Ein asiatischer Klassiker für Bubble Tea.' },
+  { name: 'Assam Schwarztee', price: 7.9, imageUrl: 'boboq_tea/assam_schwarztee.png', category: 'tee', description: 'Kräftiger Assam Schwarztee mit malzigem Charakter. Ideal für vollmundige Milchtees.' },
+  { name: 'Ceylon Schwarztee', price: 7.9, imageUrl: 'boboq_tea/ceylon_schwarztee.png', category: 'tee', description: 'Eleganter Ceylon Schwarztee mit leicht zitrusartigen Noten. Perfekt für klassischen Bubble Tea.' },
+  { name: 'Gerösteter Oolong Tee', price: 9.9, imageUrl: 'boboq_tea/geroesteter_oolong.png', category: 'tee', description: 'Gerösteter Oolong mit nussigen, karamelligen Noten. Premium-Qualität für Kenner.' },
+  { name: 'Oolong Tee', price: 9.9, imageUrl: 'boboq_tea/oolong.png', category: 'tee', description: 'PLACEHOLDER' },
+  { name: 'Smaragd Grüntee', price: 9.9, imageUrl: 'boboq_tea/smaragd_grüntee.png', category: 'tee', description: 'PLACEHOLDER' },
   // DIY Boba Kit
   { name: 'DIY Boba Kit Erdbeer-Maracuja-Apfel', price: 24.9, imageUrl: 'boboq_DIY-boba-kit/erdbeer_maracuja_apfel.png', category: 'diy', description: 'Komplettes DIY Kit mit Erdbeer, Maracuja und Apfel Boba. Perfekt für den Einstieg zu Hause.' },
   { name: 'DIY Boba Kit Mango-Pfirsisch-Litschi', price: 24.9, imageUrl: 'boboq_DIY-boba-kit/mango_pfirsisch_litschi.png', category: 'diy', description: 'Tropisches DIY Kit mit Mango, Pfirsisch und Litschi Boba. Alles was Sie brauchen in einem Set.' },
@@ -140,8 +141,8 @@ const products = [
   { name: 'Süße Azukibohnen', price: 7.9, imageUrl: 'boboq_preserves/süße-azückibohnen.png', category: 'preserves', description: 'PLACEHOLDER' },
   { name: 'Taro Gewürfelt', price: 7.9, imageUrl: 'boboq_preserves/taro_gewürfelt.png', category: 'preserves', description: 'PLACEHOLDER' },
   // Equipment
-  { name: 'Bubble Tea Becher Gänzend', price: 19.9, imageUrl: 'equipment/becher_90-660_90-500_glänzend.png', category: 'zubehor', description: 'Professionelle Bubble Tea Becher in verschiedenen Größen. 90ml bis 660ml. Ideal für den Verkauf.' },
-  { name: 'Bubble Tea Becher Matt', price: 19.9, imageUrl: 'equipment/becher_90-660_90-500_matt.png', category: 'zubehor', description: 'Professionelle Bubble Tea Becher in verschiedenen Größen. 90ml bis 660ml. Ideal für den Verkauf.' },
+  { name: 'Bubble Tea Becher Gänzend', price: 19.9, imageUrl: 'equipment/becher_90-660_90-500_glänzend.png', category: 'zubehor', description: 'Professionelle Hartplastik Bubble Tea Becher in verschiedenen Größen. 550ml und 660ml. Ideal für den Verkauf.' },
+  { name: 'Bubble Tea Becher Matt', price: 19.9, imageUrl: 'equipment/becher_90-660_90-500_matt.png', category: 'zubehor', description: 'Professionelle Hartplastik Bubble Tea Becher in verschiedenen Größen. 550ml und 660ml. Ideal für den Verkauf.' },
   { name: 'PC-Shaker', price: 19.9, imageUrl: 'equipment/PC-Shaker_530 ml,700ml.png', category: 'zubehor', description: 'Professionelle Bubble Tea Becher in verschiedenen Größen. 530ml und 700ml.' },
   { name: 'Bubble Tea Trinkhalme', price: 8.9, imageUrl: 'equipment/trinkhalm.png', category: 'zubehor', description: 'Extra-breite Trinkhalme für Bubble Tea. Perfekt für Boba und Toppings. 100 Stück.' },
   { name: 'Bubble Tea Shaker Maschine', price: 15.9, imageUrl: 'equipment/shaker_maschine.png', category: 'zubehor', description: 'Professioneller Shaker für perfekt gemixte Bubble Teas. Unverzichtbar für Baristas.' },
@@ -171,17 +172,21 @@ const products = [
 ];
 
 
+
 // Assign UUIDs to each product
-products.forEach(product => product.id = uuidv4());
+products.forEach(product => {
+  product.id = uuidv4();
+  if (!product.brand) product.brand = 'BoboQ';
+});
 
 
 async function insertProducts() {
   for (const product of products) {
     await pool.query(
-      `INSERT INTO products (id, name, description, price, imageUrl, category)
-       VALUES ($1, $2, $3, $4, $5, $6)
+      `INSERT INTO products (id, name, description, price, image, category, brand)
+       VALUES ($1, $2, $3, $4, $5, $6, $7)
        ON CONFLICT (id) DO NOTHING`,
-      [product.id, product.name, product.description, product.price, product.imageUrl, product.category]
+      [product.id, product.name, product.description, product.price, product.imageUrl, product.category, product.brand]
     );
   }
   console.log('Products inserted successfully.');

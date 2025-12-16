@@ -1,5 +1,6 @@
 # BoboQ Backend Setup Guide
 
+
 ## Installation
 
 1. Navigate to the backend folder:
@@ -22,7 +23,39 @@ PORT=5000
 
 ## Database
 
-The application uses SQLite3, which automatically creates a database file (`boboq.db`) on first run.
+
+## Nützliche SQL-Befehle für PostgreSQL
+
+```sql
+-- Alle Produkte anzeigen
+SELECT * FROM products;
+
+-- Leere brand-Felder mit Standardwert füllen
+UPDATE products SET brand = 'BoboQ' WHERE brand IS NULL;
+
+-- brand-Spalte auf NOT NULL setzen
+ALTER TABLE products ALTER COLUMN brand SET NOT NULL;
+
+-- Leere category-Felder mit Standardwert füllen
+UPDATE products SET category = 'default' WHERE category IS NULL;
+
+-- category-Spalte auf NOT NULL setzen
+ALTER TABLE products ALTER COLUMN category SET NOT NULL;
+
+-- Nur Tee- und Tapioka-Produkte anzeigen
+SELECT * FROM products WHERE category IN ('tee', 'tapioka');
+
+-- Bildpfade für Tee-Produkte aktualisieren
+UPDATE products SET image = REPLACE(image, 'Tea/', 'boboq_tea/') WHERE category = 'tee' AND image LIKE 'Tea/%';
+
+-- Bildpfade für Tapioka-Produkte aktualisieren
+UPDATE products SET image = REPLACE(image, 'tapioka/', 'boboq_tapioka/') WHERE category = 'tapioka' AND image LIKE 'tapioka/%';
+
+-- Produkt nach Name suchen
+SELECT * FROM products WHERE name ILIKE '%tapioka%';
+```
+
+Die Anwendung verwendet PostgreSQL als Datenbank. Die Verbindung wird über die Umgebungsvariable `DATABASE_URL` in der `.env`-Datei hergestellt.
 
 ### Database Schema
 

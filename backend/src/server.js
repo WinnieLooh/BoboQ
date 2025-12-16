@@ -1,51 +1,61 @@
+// Lädt .env (ESM-konform)
+import 'dotenv/config';
 
-import dotenv from 'dotenv';
-dotenv.config();
 import express from 'express';
 import cors from 'cors';
-import bodyParser from 'body-parser';
-import authRoutes from '../routes/auth.js';
-import orderRoutes from '../routes/orders.js';
-import emailRoutes from '../routes/email.js';
-import quoteRoutes from '../routes/quote.js';
-import productRoutes from '../routes/products.js';
-import logger from '../logger.js';
+
+import authRoutes from './routes/auth.routes.js';
+import orderRoutes from './routes/order.routes.js';
+import emailRoutes from './routes/email.routes.js';
+import quoteRoutes from './routes/quote.routes.js';
+import productRoutes from './routes/product.routes.js';
+import logger from './logger.js';
 
 const app = express();
 const PORT = process.env.PORT || 5000;
 
+// ==================
 // Middleware
+// ==================
 app.use(cors({
-  origin: 'http://localhost:5173',
+  origin: 'http://localhost:5173', // Vite Frontend
   credentials: true
 }));
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: true }));
 
-// Log requests
+// Express hat body-parser eingebaut
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+
+// Request Logger
 app.use((req, res, next) => {
   logger.info(`${req.method} ${req.url}`);
   next();
 });
 
-// Log errors
+// ==================
+// Routes
+// ==================
+app.use('/api/auth', authRoutes);
+app.use('/api/orders', orderRoutes);
+app.use('/api/email', emailRoutes);
+app.use('/api/quote-request', quoteRoutes);
+app.use('/api/products', productRoutes);
+
+// Health Check
+app.get('/api/health', (req, res) => {
+  res.json({ status: 'Backend is running 🚀' });
+});
+
+// ==================
+// Error Handler (am ENDE!)
+
+// ==================
 app.use((err, req, res, next) => {
   logger.error(`${err.message} - ${req.method} ${req.url}`);
-  res.status(500).send('Internal Server Error');
+  res.status(500).json({ message: 'Internal Server Error' });
 });
 
-// Routes
-app.use('/backend/api/auth', authRoutes);
-app.use('/backend/api/orders', orderRoutes);
-app.use('/backend/api/email', emailRoutes);
-app.use('/backend/api/quote-request', quoteRoutes);
-app.use('/backend/api/products', productRoutes);
-
-// Health check
-app.get('/backend/api/health', (req, res) => {
-  res.json({ status: 'Backend is running' });
-});
-
+// ==================
 app.listen(PORT, () => {
-  console.log(`Server running on http://localhost:${PORT}`);
+  console.log(`✅ Server running on http://localhost:${PORT}`);
 });
