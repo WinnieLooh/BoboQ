@@ -1,20 +1,41 @@
 import { useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
-import { products } from '../../data/products';
+// import { products } from '../../data/products';
 import { useLanguage } from '../../contexts/LanguageContext';
 import './ProductDetail.scss';
 
 interface ProductDetailPageProps {
   onAddToCart: (productId: string, name: string, price: number, qty: number) => void;
 }
-
-export function ProductDetailPage({ onAddToCart }: ProductDetailPageProps) {
+function ProductDetailPage({ onAddToCart }: ProductDetailPageProps) {
   const { id } = useParams();
-  const product = products.find((p) => p.id === id);
+  const [product, setProduct] = useState<any | null>(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
   const [quantity, setQuantity] = useState(1);
   const { t, tp } = useLanguage();
 
-  if (!product) {
+  useEffect(() => {
+    setLoading(true);
+    fetch(`/backend/api/products/${id}`)
+      .then((res) => {
+        if (!res.ok) throw new Error('Produkt nicht gefunden');
+        return res.json();
+      })
+      .then((data) => {
+        setProduct(data);
+        setLoading(false);
+      })
+      .catch((err) => {
+        setError(err.message);
+        setLoading(false);
+      });
+  }, [id]);
+
+  if (loading) {
+    return <div className="product-detail-page"><p>Lade Produkt...</p></div>;
+  }
+  if (error || !product) {
     return (
       <div className="product-detail-page">
         <div className="product-detail-card card">

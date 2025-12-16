@@ -1,7 +1,7 @@
 import { useState, useMemo, useEffect } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import { ProductCard } from '../../components/ProductCard/ProductCard';
-import { products } from '../../data/products';
+// import { products } from '../../data/products';
 import { useLanguage } from '../../contexts/LanguageContext';
 import type { FilterCategory } from '../../types';
 import './Shop.scss';
@@ -9,17 +9,39 @@ import './Shop.scss';
 interface ShopPageProps {
   onAddToCart: (productId: string, name: string, price: number, qty: number) => void;
 }
-
-export const ShopPage = ({ onAddToCart }: ShopPageProps) => {
+export default ShopPage;
+function ShopPage({ onAddToCart }: ShopPageProps) {
   const { t } = useLanguage();
   const [searchParams] = useSearchParams();
   const [currentCategory, setCurrentCategory] = useState<FilterCategory>('all');
   const [searchTerm, setSearchTerm] = useState('');
+  const [products, setProducts] = useState<Array<{ id: string; name: string; price: number; category: string; image?: string }>>([]);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+
+  useEffect(() => {
+    let ignore = false;
+    setLoading(true);
+    fetch('/api/products')
+      .then((res) => {
+        if (!res.ok) throw new Error('Fehler beim Laden der Produkte');
+        return res.json();
+      })
+      .then((data) => {
+        if (!ignore) setProducts(data);
+        setLoading(false);
+      })
+      .catch((err) => {
+        if (!ignore) setError(err.message);
+        setLoading(false);
+      });
+    return () => { ignore = true; };
+  }, []);
 
   useEffect(() => {
     const categoryParam = searchParams.get('category') as FilterCategory | null;
     if (categoryParam && ['boba', 'tapioka', 'tee', 'sirup', 'zubehor', 'pulver', 'jelly', 'jellyjuice', 'crystal', 'diy'].includes(categoryParam)) {
-      setCurrentCategory(categoryParam);
+      setTimeout(() => setCurrentCategory(categoryParam), 0);
     }
   }, [searchParams]);
 
@@ -38,7 +60,7 @@ export const ShopPage = ({ onAddToCart }: ShopPageProps) => {
   ];
 
   const parsePrice = (text: string): number => {
-    const match = text.replace(/\s/g, '').match(/(\d+[\.,]?\d*)/);
+    const match = text.replace(/\s/g, '').match(/(\d+[.,]?\d*)/);
     if (!match) return NaN;
     return parseFloat(match[1].replace(',', '.'));
   };
@@ -48,7 +70,7 @@ export const ShopPage = ({ onAddToCart }: ShopPageProps) => {
     term = term.trim().toLowerCase();
 
     // Price comparison: price:<5 or price:>3.5 or price:=4.90
-    const priceMatch = term.match(/^price:\s*([<>]=?|=)?\s*([\d\.,]+)$/i);
+    const priceMatch = term.match(/^price:\s*([<>]=?|=)?\s*([\d.,]+)$/i);
     if (priceMatch) {
       const op = priceMatch[1] || '=';
       const num = parsePrice(priceMatch[2]);
@@ -72,7 +94,7 @@ export const ShopPage = ({ onAddToCart }: ShopPageProps) => {
     }
 
     // Numeric term: try match price equals
-    const numeric = term.match(/^([\d\.,]+)$/);
+    const numeric = term.match(/^([\d.,]+)$/);
     if (numeric) {
       const num = parsePrice(numeric[1]);
       const product = products.find((p) => p.name === productName);
@@ -90,7 +112,7 @@ export const ShopPage = ({ onAddToCart }: ShopPageProps) => {
       const searchMatch = matchesSearch(product.name, searchTerm);
       return categoryMatch && searchMatch;
     });
-  }, [currentCategory, searchTerm]);
+  }, [products, currentCategory, searchTerm, matchesSearch]);
 
   return (
     <div className="shop-page">
@@ -119,7 +141,11 @@ export const ShopPage = ({ onAddToCart }: ShopPageProps) => {
           </div>
 
           <div className="products" id="products">
-            {filteredProducts.length > 0 ? (
+            {loading ? (
+              <p>Lade Produkte...</p>
+            ) : error ? (
+              <p className="no-products">{error}</p>
+            ) : filteredProducts.length > 0 ? (
               filteredProducts.map((product) => {
                 const isNestleProduct = product.name.toLowerCase().includes('coffee-mate');
                 const cleanName = product.name.replace(/BOBOQ /i, '');
@@ -128,7 +154,7 @@ export const ShopPage = ({ onAddToCart }: ShopPageProps) => {
                     key={product.id}
                     product={{ ...product, name: cleanName }}
                     onAddToCart={onAddToCart}
-                    brand={isNestleProduct ? 'Nestlé' : undefined} // Add Nestlé above coffee-mate
+                    brand={isNestleProduct ? 'Nestlé' : undefined}
                   />
                 );
               })
@@ -140,4 +166,4 @@ export const ShopPage = ({ onAddToCart }: ShopPageProps) => {
       </div>
     </div>
   );
-};
+}

@@ -1,5 +1,5 @@
-const express = require('express');
-const nodemailer = require('nodemailer');
+import express from 'express';
+import nodemailer from 'nodemailer';
 const router = express.Router();
 
 // Configure the email transporter using environment variables
@@ -33,4 +33,4 @@ router.post('/send-offer', async (req, res) => {
   }
 });
 
-module.exports = router;
+export default router;

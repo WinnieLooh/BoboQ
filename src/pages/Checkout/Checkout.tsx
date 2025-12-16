@@ -53,7 +53,7 @@ export const CheckoutPage = ({ cart, onCheckoutComplete }: CheckoutProps) => {
     setLoading(true);
 
     try {
-      const response = await fetch('http://localhost:5000/api/orders', {
+      const response = await fetch('/backend/api/orders', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

@@ -1,8 +1,8 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { Header } from './components/Header/Header';
 import { Footer } from './components/Footer/Footer';
-import { HomePage } from './pages/Home/Home';
-import { ShopPage } from './pages/Shop/Shop';
+import HomePage from './pages/Home/Home';
+import ShopPage from './pages/Shop/Shop';
 import { CartPage } from './pages/Cart/Cart';
 import { ContactPage } from './pages/Contact/Contact';
 import { FAQPage } from './pages/FAQ/FAQ';
