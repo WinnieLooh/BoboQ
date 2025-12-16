@@ -1,3 +1,47 @@
+// iOS/iPhone specific mobile optimizations
+@media (max-width: 480px) {
+  .cart-page {
+    /* Add extra bottom padding for iOS safe area */
+    padding-bottom: max(16px, env(safe-area-inset-bottom));
+  }
+  .cart-container {
+    /* Prevent horizontal scroll */
+    overflow-x: hidden;
+  }
+  .cart-total {
+    /* Make action bar sticky at bottom for easier access */
+    position: sticky;
+    bottom: 0;
+    z-index: 10;
+    background: var(--bg-white);
+    box-shadow: 0 -2px 12px rgba(0,0,0,0.07);
+    margin-bottom: 0;
+    border-bottom-left-radius: max(8px, env(safe-area-inset-bottom));
+    border-bottom-right-radius: max(8px, env(safe-area-inset-bottom));
+  }
+  .cart-actions {
+    flex-direction: column;
+    gap: 8px;
+    width: 100%;
+    button {
+      width: 100%;
+      min-height: 44px; /* iOS recommended touch target */
+      font-size: 15px;
+    }
+  }
+  .cart-item {
+    /* Increase tap area for remove button */
+    .remove-btn {
+      min-width: 44px;
+      min-height: 44px;
+      font-size: 15px;
+    }
+    .qty-input {
+      font-size: 15px;
+      min-height: 36px;
+    }
+  }
+}
 // Style for total-amount
 .total-amount {
   display: flex;

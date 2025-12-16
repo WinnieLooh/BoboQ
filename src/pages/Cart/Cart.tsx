@@ -59,7 +59,7 @@ export const CartPage = ({ cart, onRemove, onChangeQty }: CartPageProps) => {
               </div>
               <h3 id="total" className="total-amount">
                 <span>Estimated Total Amount:</span>
-                <span className="total-amount-value">{total.toFixed(2)} </span>
+                <span className="total-amount-value">{total.toFixed(2)} €</span>
               </h3>
               <div className="cart-actions">
                 <button className="quote-btn" onClick={handleRequestQuote}>

@@ -1,6 +1,6 @@
-const express = require('express');
-const nodemailer = require('nodemailer');
-const db = require('../database');
+import express from 'express';
+import nodemailer from 'nodemailer';
+import pool from '../database.js';
 const router = express.Router();
 
 // Email transporter config (reuse from email.js if possible)
@@ -12,17 +12,17 @@ const transporter = nodemailer.createTransport({
   }
 });
 
-// Ensure quote_requests table exists
-function ensureQuoteTable() {
-  db.prepare(`
+// Ensure quote_requests table exists (PostgreSQL)
+async function ensureQuoteTable() {
+  await pool.query(`
     CREATE TABLE IF NOT EXISTS quote_requests (
-      id INTEGER PRIMARY KEY AUTOINCREMENT,
+      id SERIAL PRIMARY KEY,
       email TEXT NOT NULL,
       cart TEXT NOT NULL,
       total REAL NOT NULL,
-      createdAt DATETIME DEFAULT CURRENT_TIMESTAMP
+      createdAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP
     )
-  `).run();
+  `);
 }
 ensureQuoteTable();
 
@@ -35,8 +35,10 @@ router.post('/', async (req, res) => {
 
   // Save to DB
   try {
-    db.prepare('INSERT INTO quote_requests (email, cart, total) VALUES (?, ?, ?)')
-      .run(email, JSON.stringify(cart), total);
+    await pool.query(
+      'INSERT INTO quote_requests (email, cart, total) VALUES ($1, $2, $3)',
+      [email, JSON.stringify(cart), total]
+    );
   } catch (err) {
     return res.status(500).json({ error: 'Failed to save quote request' });
   }
@@ -56,4 +58,4 @@ router.post('/', async (req, res) => {
   }
 });
 
-module.exports = router;
+export default router;

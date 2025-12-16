@@ -20,28 +20,31 @@ self.addEventListener('install', (event) => {
 // Fetch event with network-first strategy
 self.addEventListener('fetch', (event) => {
   event.respondWith(
-    fetch(event.request)
-      .then((response) => {
-        if (!response || response.status !== 200 || response.type === 'error') {
-          return response;
-        }
-        const responseToCache = response.clone();
-        caches.open(CACHE_NAME).then((cache) => {
-          cache.put(event.request, responseToCache);
-        });
-        return response;
-      })
-      .catch(() => {
-        return caches.match(event.request).then((response) => {
-          return response || new Response('Offline - Resource not available', {
-            status: 503,
-            statusText: 'Service Unavailable',
-            headers: new Headers({
-              'Content-Type': 'text/plain'
-            })
-          });
-        });
-      })
+    // Prevent caching of unsupported schemes (like chrome-extension)
+    (event.request.url.startsWith('chrome-extension://'))
+      ? fetch(event.request)
+      : fetch(event.request)
+          .then((response) => {
+            if (!response || response.status !== 200 || response.type === 'error') {
+              return response;
+            }
+            const responseToCache = response.clone();
+            caches.open(CACHE_NAME).then((cache) => {
+              cache.put(event.request, responseToCache);
+            });
+            return response;
+          })
+          .catch(() => {
+            return caches.match(event.request).then((response) => {
+              return response || new Response('Offline - Resource not available', {
+                status: 503,
+                statusText: 'Service Unavailable',
+                headers: new Headers({
+                  'Content-Type': 'text/plain'
+                })
+              });
+            });
+          })
   );
 });
 
